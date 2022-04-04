@@ -1,1 +1,1 @@
-# Programming-Advanced-With-Java-Advanced-Course
+# Programming-Advanced-With-Java-SoftUni-Course
