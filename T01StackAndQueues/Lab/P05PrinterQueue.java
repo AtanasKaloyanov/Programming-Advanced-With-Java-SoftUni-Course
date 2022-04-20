@@ -23,6 +23,7 @@ public class P05PrinterQueue {
             }
             input = scanner.nextLine();
         }
+        
         for (String file : files) {
             System.out.println(file);
         }
