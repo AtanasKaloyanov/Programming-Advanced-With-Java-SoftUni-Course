@@ -2,7 +2,6 @@ package T01StackAndQueues.Lab;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class P07MathPotato {
@@ -13,44 +12,58 @@ public class P07MathPotato {
         int passes = Integer.parseInt(scanner.nextLine());
         int counter = 1;
 
-
         while (kids.size() > 1) {
             for (int i = 1; i < passes; i++) {
                 String potatoHolder = kids.peek();
                 kids.offer(potatoHolder);
                 kids.poll();
             }
-            if (counter == 1) {
-                String removedKid = kids.poll();
-                System.out.printf("Removed %s%n", removedKid);
+
+            if (isComposite(counter)) {
+                String leavingKid = kids.poll();
+                System.out.printf("Removed %s%n", leavingKid);
             } else {
-
-                boolean isComposite = false;
-
-                for (int i = 1; i <= counter; i++) {
-                    if (counter % i == 0 && i != 1 && i != counter) {
-                        String removedKid = kids.poll();
-                        System.out.printf("Removed %s%n", removedKid);
-                        isComposite = true;
-                        break;
-                    }
-                }
-
-                if (!isComposite) {
-                    System.out.printf("Prime %s%n", kids.peek());
-                }
+                String primeCounterKid = kids.peek();
+                System.out.printf("Prime %s%n", primeCounterKid);
             }
-
             counter++;
+        }
+        String lastKid = kids.peek();
+        System.out.printf("Last is %s", lastKid);
+    }
 
+    private static boolean isComposite(int number) {
+        if (number == 1) {
+            return true;
         }
 
-        System.out.printf("Last is %s", kids.peek());
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }
-// 1 - yes
-//  2 - 1, 2 - no
-//  3 - 1, 3 - no
-//  4 - 1,2,4 - yes
-//  5 - 1,5  - не
-//  6 - 1,2,3,6 - yes
+
+//Maria Peter George
+//2
+
+//Removed Peter
+//Prime Maria
+//Prime George
+//Removed Maria
+//Last is George
+
+//George Peter Misha Sara Kendal
+//10
+
+//Removed Kendal
+//Prime Peter
+//Prime Misha
+//Removed Sara
+//Prime George
+//Removed George
+//Prime Misha
+//Removed Peter
+//Last is Misha
