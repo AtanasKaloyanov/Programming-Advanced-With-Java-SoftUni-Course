@@ -6,55 +6,40 @@ import java.util.Scanner;
 public class P08BrowserHistoryUpgrade {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayDeque<String> pages = new ArrayDeque<>();
-        ArrayDeque<String> forwardPages = new ArrayDeque<>();
-        String input = scanner.nextLine();
 
-        while (!input.equals("Home")) {
+        ArrayDeque<String> back = new ArrayDeque<String>();
+        ArrayDeque<String> forward = new ArrayDeque<String>();
+
+        String input;
+        String current = null;
+
+        while (!"Home".equals(input = scanner.nextLine())) {
             if (input.equals("back")) {
-                if (pages.size() <= 1) {
+                if (back.isEmpty()) {
                     System.out.println("no previous URLs");
                 } else {
-                    pages.pop();
-                    String currentUrl = pages.peek();
-                    System.out.println(currentUrl);
+                    forward.push(current);
+                    current = back.pop();
+                    System.out.println(current);
                 }
+
             } else if (input.equals("forward")) {
+                if (forward.isEmpty()) {
+                    System.out.println("no next URLs");
+                } else {
+                    back.push(current);
+                    current = forward.pop();
+                    System.out.println(current);
+                }
 
+            } else {
+                if (current != null) {
+                    back.push(current);
+                }
+                current = input;
+                forward.clear();
+                System.out.println(current);
             }
-                else {
-                pages.push(input);
-                System.out.println(input);
-            }
-            input = scanner.nextLine();
         }
-
     }
 }
-
-//back
-//https//google.bg/
-//https//google.bg/softuni
-//back
-//forward
-//https//google.bg/java/advanced
-//back
-//forward
-//https//google.bg/java/oop
-//back
-//https//google.bg/java/oop
-//Home
-
-
-//no previous URLs
-//https//google.bg/
-//https//google.bg/softuni
-//https//google.bg/
-//https//google.bg/softuni
-//https//google.bg/java/advanced
-//https//google.bg/softuni
-//https//google.bg/java/advanced
-//https//google.bg/java/oop
-//https//google.bg/java/advanced
-//https//google.bg/java/oop
-
