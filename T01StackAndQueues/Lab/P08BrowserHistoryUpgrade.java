@@ -1,5 +1,6 @@
 package T01StackAndQueues.Lab;
 
+
 import java.util.ArrayDeque;
 import java.util.Scanner;
 
@@ -7,39 +8,41 @@ public class P08BrowserHistoryUpgrade {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        ArrayDeque<String> back = new ArrayDeque<String>();
-        ArrayDeque<String> forward = new ArrayDeque<String>();
+        ArrayDeque<String> backPages = new ArrayDeque<>();
+        ArrayDeque<String> forwardPages = new ArrayDeque<>();
 
-        String input;
-        String current = null;
+        String input = scanner.nextLine();
+        String currentUrl = "";
 
-        while (!"Home".equals(input = scanner.nextLine())) {
+        while (!input.equals("Home")) {
             if (input.equals("back")) {
-                if (back.isEmpty()) {
+                if (backPages.isEmpty()) {
                     System.out.println("no previous URLs");
                 } else {
-                    forward.push(current);
-                    current = back.pop();
-                    System.out.println(current);
+                    forwardPages.push(currentUrl);
+                    currentUrl = backPages.pop();
+                    System.out.println(currentUrl);
                 }
 
             } else if (input.equals("forward")) {
-                if (forward.isEmpty()) {
+                if (forwardPages.isEmpty()) {
                     System.out.println("no next URLs");
                 } else {
-                    back.push(current);
-                    current = forward.pop();
-                    System.out.println(current);
+                    backPages.push(currentUrl);
+                    currentUrl = forwardPages.pop();
+                    System.out.println(currentUrl);
                 }
 
             } else {
-                if (current != null) {
-                    back.push(current);
+                if (!currentUrl.equals("")) {
+                    backPages.push(currentUrl);
                 }
-                current = input;
-                forward.clear();
-                System.out.println(current);
+                forwardPages.clear();
+                currentUrl = input;
+                System.out.println(currentUrl);
             }
+
+            input = scanner.nextLine();
         }
     }
 }
