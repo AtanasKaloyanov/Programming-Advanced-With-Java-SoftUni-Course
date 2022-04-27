@@ -16,11 +16,14 @@ public class P05BalancedParentheses {
             if (currentChar == '(' || currentChar == '[' || currentChar == '{') {
                 stack.push(currentChar);
             } else if (currentChar == ')' || currentChar == ']' || currentChar == '}'){
+
                 if (stack.isEmpty()) {
                     isBalanced = false;
                     break;
                 }
+
                 char currentOpenBracket = stack.pop();
+
                 if (currentOpenBracket == '(' && currentChar == ')') {
                     isBalanced = true;
                 } else if (currentOpenBracket == '[' && currentChar == ']') {
