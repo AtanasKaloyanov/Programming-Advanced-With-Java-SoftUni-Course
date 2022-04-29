@@ -10,17 +10,17 @@ public class P04SumMatrixElements {
         int rows = Integer.parseInt(inputArray[0]);
         int columns = Integer.parseInt(inputArray[1]);
 
-        int counter = 0;
+        int sum = 0;
 
         for (int i = 0; i < rows; i++) {
                 String[] array = scanner.nextLine().split(", ");
             for (int j = 0; j < columns; j++) {
                 int currentElement = Integer.parseInt(array[j]);
-                counter += currentElement;
+                sum += currentElement;
             }
         }
         System.out.println(rows);
         System.out.println(columns);
-        System.out.println(counter);
+        System.out.println(sum);
     }
 }
