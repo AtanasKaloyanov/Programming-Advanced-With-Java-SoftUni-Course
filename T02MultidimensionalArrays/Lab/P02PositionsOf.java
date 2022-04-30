@@ -32,8 +32,7 @@ public class P02PositionsOf {
 
                 if (searchedNumber == currentNumber) {
                     find = true;
-                    System.out.print(i + " ");
-                    System.out.println(j);
+                    System.out.println(i + " " + j);
                 }
             }
         }
