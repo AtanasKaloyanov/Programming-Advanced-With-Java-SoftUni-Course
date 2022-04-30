@@ -9,27 +9,27 @@ public class P03IntersectionOfTwoMatrices {
 
         int rows = Integer.parseInt(scanner.nextLine());
         int colums = Integer.parseInt(scanner.nextLine());
-        String[][] firstMatrix = new String[rows][colums];
+        char[][] firstMatrix = new char[rows][colums];
 
         for (int i = 0; i < rows; i++) {
             String[] array = scanner.nextLine().split(" ");
             for (int j = 0; j < colums ; j++) {
-               firstMatrix[i][j] = array[j];
+               firstMatrix[i][j] = array[j].charAt(0);
             }
         }
 
-        String[][] secondMatrix = new String[rows][colums];
+        char[][] secondMatrix = new char[rows][colums];
 
         for (int i = 0; i < rows; i++) {
             String[] array = scanner.nextLine().split(" ");
             for (int j = 0; j < colums ; j++) {
-                secondMatrix[i][j] = array[j];
+                secondMatrix[i][j] = array[j].charAt(0);
             }
         }
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < colums; j++) {
-                if (firstMatrix[i][j].equals(secondMatrix[i][j])) {
+                if (firstMatrix[i][j] == secondMatrix[i][j]) {
                     System.out.print(firstMatrix[i][j] + " ");
                 } else {
                     System.out.print('*' + " ");
