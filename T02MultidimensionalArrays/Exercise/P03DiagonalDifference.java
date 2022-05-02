@@ -11,19 +11,28 @@ public class P03DiagonalDifference {
 
         fillingMatrix(matrix, scanner);
 
-        int primaryDiagonalSum = 0;
-        for (int row = 0; row < rowsAndColumns; row++) {
-           int currentElement = matrix[row][row];
-            primaryDiagonalSum += currentElement;
-        }
-
-        int secondaryDiagonalSum = 0;
-        for (int row = 0; row < rowsAndColumns; row++) {
-           secondaryDiagonalSum += matrix[row][rowsAndColumns - row - 1];
-        }
-
+        int primaryDiagonalSum = getSumPrimaryDiagonal(matrix);
+        int secondaryDiagonalSum = getSumSecondaryDiagonal(matrix);
+        
         int sum = Math.abs(primaryDiagonalSum - secondaryDiagonalSum);
         System.out.println(sum);
+    }
+
+    private static int getSumSecondaryDiagonal(int[][] matrix) {
+        int secondaryDiagonalSum = 0;
+        for (int row = 0; row < matrix.length; row++) {
+            secondaryDiagonalSum += matrix[row][matrix.length - row - 1];
+        }
+        return  secondaryDiagonalSum;
+    }
+
+    private static int getSumPrimaryDiagonal(int[][] matrix) {
+        int primaryDiagonalSum = 0;
+        for (int row = 0; row < matrix.length; row++) {
+            int currentElement = matrix[row][row];
+            primaryDiagonalSum += currentElement;
+        }
+        return primaryDiagonalSum;
     }
 
     private static void fillingMatrix(int[][] matrix, Scanner scanner) {
