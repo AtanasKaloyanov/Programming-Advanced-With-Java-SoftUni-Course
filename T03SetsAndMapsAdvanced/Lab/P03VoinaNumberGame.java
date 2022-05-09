@@ -43,9 +43,6 @@ public class P03VoinaNumberGame {
             } else if (secondPlayerCard > firstPlayerCard) {
                 secondPlayerCards.add(firstPlayerCard);
                 secondPlayerCards.add(secondPlayerCard);
-            } else {
-                firstPlayerCards.add(firstPlayerCard);
-                secondPlayerCards.add(secondPlayerCard);
             }
         }
 
