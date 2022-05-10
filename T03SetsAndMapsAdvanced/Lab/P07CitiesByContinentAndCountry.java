@@ -21,8 +21,6 @@ public class P07CitiesByContinentAndCountry {
 
         }
 
-        System.out.println();
-
         map.forEach((key, value) -> {
             System.out.printf("%s:%n", key);
             value.forEach((valueKey, valueValue) -> {
