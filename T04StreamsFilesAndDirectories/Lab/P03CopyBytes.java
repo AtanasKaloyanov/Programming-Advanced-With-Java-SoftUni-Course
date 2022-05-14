@@ -20,9 +20,9 @@ public class P03CopyBytes {
                 if (oneByte == 32 || oneByte == 10) {
                     out.write(oneByte);
                 } else {
-                    String digit = String.valueOf(oneByte);
-                    for (int i = 0; i < digit.length(); i++) {
-                        out.write(digit.charAt(i));
+                    String oneByteToString = String.valueOf(oneByte);
+                    for (int i = 0; i < oneByteToString.length(); i++) {
+                        out.write(oneByteToString.charAt(i));
                     }
                 }
                 oneByte = in.read();
