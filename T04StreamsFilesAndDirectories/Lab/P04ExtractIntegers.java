@@ -1,9 +1,6 @@
 package T04StreamsFilesAndDirectories.Lab;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class P04ExtractIntegers {
@@ -13,10 +10,10 @@ public class P04ExtractIntegers {
         String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\output.txt";
 
         try {
-            FileInputStream in = new FileInputStream(inPath);
+            FileReader in = new FileReader(inPath);
             Scanner scanner = new Scanner(in);
 
-            FileOutputStream out = new FileOutputStream(outPath);
+            FileWriter out = new FileWriter(outPath);
             PrintWriter printOut = new PrintWriter(out);
 
             while (scanner.hasNext()) {
@@ -28,7 +25,6 @@ public class P04ExtractIntegers {
 
                 scanner.next();
             }
-
             printOut.close();
 
         } catch (IOException e) {
