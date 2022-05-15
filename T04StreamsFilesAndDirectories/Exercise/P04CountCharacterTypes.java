@@ -1,5 +1,8 @@
 package T04StreamsFilesAndDirectories.Exercise;
 
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,9 +42,18 @@ public class P04CountCharacterTypes {
                 }
             }
 
-            System.out.printf("Vowels: %d%n", vowels);
-            System.out.printf("Consonants: %d%n", consonants);
-            System.out.printf("Punctuation: %d", punctuation);
+            String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\output.txt";
+            FileWriter fileReader = new FileWriter(outPath);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
+
+            bufferedWriter.write("Vowels: " + vowels);
+            bufferedWriter.newLine();
+            bufferedWriter.write("Consonants: " + consonants);
+            bufferedWriter.newLine();
+            bufferedWriter.write("Punctuation: " + punctuation);
+            bufferedWriter.newLine();
+
+            bufferedWriter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
