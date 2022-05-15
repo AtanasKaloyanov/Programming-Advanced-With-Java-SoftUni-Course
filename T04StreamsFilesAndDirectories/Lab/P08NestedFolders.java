@@ -15,7 +15,7 @@ public class P08NestedFolders {
         ArrayDeque<File> queue = new ArrayDeque<>();
         queue.add(folder);
 
-        int folderCount = 0;
+        int folderCounter = 0;
 
         while (!queue.isEmpty()) {
             File currentFile = queue.poll();
@@ -23,10 +23,10 @@ public class P08NestedFolders {
             if (currentFile.isDirectory()) {
                 System.out.println(currentFile.getName());
                 queue.addAll(List.of(currentFile.listFiles()));
-                folderCount++;
+                folderCounter++;
             }
         }
 
-        System.out.printf("%d folders", folderCount);
+        System.out.printf("%d folders", folderCounter);
     }
 }
