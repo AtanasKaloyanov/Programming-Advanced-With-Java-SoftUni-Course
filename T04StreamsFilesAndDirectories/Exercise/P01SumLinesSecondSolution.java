@@ -13,18 +13,18 @@ public class P01SumLinesSecondSolution {
 
         try {
             Path path = Path.of(pathString);
-            List<String> lines = Files.readAllLines(path);
+            List<String> allLines = Files.readAllLines(path);
 
+            allLines.stream()
+                    .map(line ->line.toCharArray())
+                    .forEach(array -> {
+                        int sum = 0;
+                        for (char currentChar : array) {
+                            sum += currentChar;
+                        }
+                        System.out.println(sum);
+                    });
 
-            for (String line : lines) {
-
-                int sum = 0;
-                for (int i = 0; i < line.length(); i++) {
-                    char currentChar = line.charAt(i);
-                    sum += currentChar;
-                }
-                System.out.println(sum);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
