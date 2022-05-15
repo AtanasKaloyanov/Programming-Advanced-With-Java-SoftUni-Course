@@ -16,7 +16,7 @@ public class P01SumLines {
 
             String currentLine = bf.readLine();
             while (currentLine != null) {
-                int currentSum = 0;
+                long currentSum = 0;
                 for (int i = 0; i < currentLine.length() ; i++) {
                     int currentChar = currentLine.charAt(i);
                     currentSum += currentChar;

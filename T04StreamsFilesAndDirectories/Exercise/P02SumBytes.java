@@ -12,7 +12,7 @@ public class P02SumBytes {
           FileReader fileReader = new FileReader(path);
           BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-          int sum = 0;
+          long sum = 0;
           String line = bufferedReader.readLine();
           while (line != null) {
 
