@@ -41,10 +41,16 @@ public class P07MergeTwoFiles {
                 secondLine = secondBufferedReader.readLine();
             }
 
+            String printPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\newOutput.txt";
+            FileWriter fileWriter = new FileWriter(printPath);
+
+            PrintWriter printWriter = new PrintWriter(fileWriter);
 
             list.stream().sorted( (firstElement, secondElement) -> {
                 return firstElement.compareTo(secondElement);
-            }).forEach(number -> System.out.println(number));
+            }).forEach(number -> printWriter.println(number));
+
+            printWriter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
