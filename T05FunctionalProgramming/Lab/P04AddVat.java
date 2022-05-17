@@ -12,6 +12,6 @@ public class P04AddVat {
         Arrays.stream(scanner.nextLine().split(", "))
                 .map(element -> Double.parseDouble(element))
                 .map(element -> 1.2 * element)
-                .forEach(element -> System.out.printf("%.2f%n", Math.abs(element)));
+                .forEach(element -> System.out.printf("%.2f%n", element));
     }
 }
