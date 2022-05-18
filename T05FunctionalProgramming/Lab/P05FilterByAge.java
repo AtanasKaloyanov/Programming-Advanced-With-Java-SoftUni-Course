@@ -3,6 +3,9 @@ package T05FunctionalProgramming.Lab;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.BiPredicate;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class P05FilterByAge {
     public static void main(String[] args) {
@@ -23,43 +26,35 @@ public class P05FilterByAge {
         int age = Integer.parseInt(scanner.nextLine());
         String format = scanner.nextLine();
 
+        BiPredicate<Integer, Integer> filterPredicate;
+
+        if (condition.equals("younger")) {
+            filterPredicate = (personAge, conditionAge) -> personAge <= conditionAge;
+        } else {
+            filterPredicate = (personAge, conditionAge) -> personAge >= conditionAge;
+        }
+
+        Consumer<Map.Entry<String, Integer>> printConsumer;
+
         switch (format) {
             case "name":
-                if (condition.equals("younger")) {
-                    namesAndAges.entrySet().stream()
-                            .filter(element -> element.getValue() <= age)
-                            .forEach(element -> System.out.println(element.getKey()));
-                } else {
-                    namesAndAges.entrySet().stream()
-                            .filter(element -> element.getValue() >= age)
-                            .forEach(element -> System.out.println(element.getKey()));
-                }
+                printConsumer = entry -> System.out.println(entry.getKey());
                 break;
 
             case "age":
-                if (condition.equals("younger")) {
-                    namesAndAges.entrySet().stream()
-                            .filter(element -> element.getValue() <= age)
-                            .forEach(element -> System.out.println(element.getValue()));
-                } else {
-                    namesAndAges.entrySet().stream()
-                            .filter(element -> element.getValue() >= age)
-                            .forEach(element -> System.out.println(element.getValue()));
-                }
+                printConsumer = entry -> System.out.println(entry.getValue());
                 break;
 
             case "name age":
-                if (condition.equals("younger")) {
-                    namesAndAges.entrySet().stream()
-                            .filter(element -> element.getValue() <= age)
-                            .forEach(element -> System.out.printf("%s - %d%n", element.getKey(), element.getValue()));
-                } else {
-                    namesAndAges.entrySet().stream()
-                            .filter(element -> element.getValue() >= age)
-                            .forEach(element -> System.out.printf("%s - %d%n", element.getKey(), element.getValue()));
-                }
+            printConsumer = entry -> System.out.printf("%s - %d%n", entry.getKey(), entry.getValue());
                 break;
-        }
-    }
 
+            default:
+                throw new IllegalStateException("Unexpected value: " + format);
+        }
+
+        namesAndAges.entrySet().stream()
+                .filter(person -> filterPredicate.test(person.getValue(), age))
+                .forEach(printConsumer);
+    }
 }
