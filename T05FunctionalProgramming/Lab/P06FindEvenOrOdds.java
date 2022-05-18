@@ -1,5 +1,7 @@
 package T05FunctionalProgramming.Lab;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -24,10 +26,20 @@ public class P06FindEvenOrOdds {
 
         Consumer<Integer> printer = x -> System.out.print(x + " ");
 
-        IntStream
+       List<Integer> list = new ArrayList<>();
+        for (int i = begin; i <= end ; i++) {
+            list.add(i);
+        }
+
+        list.stream()
+                .filter(element -> predicate.test(element))
+                .forEach(printer);
+
+           /*  IntStream
                 .rangeClosed(begin, end)
                 .filter(element -> predicate.test(element))
                 .boxed()
-                .forEach(printer);
+                .forEach(printer); */
+        
     }
 }
