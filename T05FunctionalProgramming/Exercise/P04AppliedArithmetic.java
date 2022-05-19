@@ -15,24 +15,25 @@ public class P04AppliedArithmetic {
                 .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
 
-        Function<List<Integer>, List<Integer>> adding = list -> list.stream().map(number -> number + 1).collect(Collectors.toList());
-        Function<List<Integer>, List<Integer>> multiplication = list -> list.stream().map(number -> number * 2).collect(Collectors.toList());
-        Function<List<Integer>, List<Integer>> subtraction = list -> list.stream().map(number -> number - 1).collect(Collectors.toList());
+        Function<List<Integer>, List<Integer>> function;
         Consumer<List<Integer>> printing = list -> list.forEach(element -> System.out.print(element + " "));
 
         String input = scanner.nextLine();
         while (!input.equals("end")) {
             switch (input) {
                 case "add":
-                    inputList = adding.apply(inputList);
+                    function = list -> list.stream().map(number -> number + 1).collect(Collectors.toList());
+                    inputList = function.apply(inputList);
                     break;
 
                 case "multiply":
-                    inputList = multiplication.apply(inputList);
+                    function = list -> list.stream().map(number -> number * 2).collect(Collectors.toList());
+                    inputList = function.apply(inputList);
                     break;
 
                 case "subtract":
-                    inputList = subtraction.apply(inputList);
+                    function = list -> list.stream().map(number -> number - 1).collect(Collectors.toList());
+                    inputList = function.apply(inputList);
                     break;
 
                 case "print":
