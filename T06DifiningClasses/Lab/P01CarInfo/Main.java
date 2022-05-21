@@ -18,7 +18,7 @@ public class Main {
             car.setModel(array[1]);
             car.setHorsePower(Integer.parseInt(array[2]));
 
-            System.out.print(String.format("The car is: %s %s - %d HP.%n", car.getBrand(), car.getModel(), car.getHorsePower()));
+            System.out.print(car.toString());
         }
     }
 }
