@@ -8,7 +8,7 @@ public class Main {
         int numberPeople = Integer.parseInt(scanner.nextLine());
         Map<String, Integer> map = new TreeMap<>();
 
-        for (int i = 1; i <= numberPeople ; i++) {
+        for (int i = 1; i <= numberPeople; i++) {
             String[] array = scanner.nextLine().split("\\s+");
             String currentName = array[0];
             int currentAge = Integer.parseInt(array[1]);
