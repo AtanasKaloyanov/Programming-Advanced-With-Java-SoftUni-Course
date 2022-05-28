@@ -6,5 +6,8 @@ public class Main {
 
           ArrayCreator.create(5, "Pesho");
           ArrayCreator.create(String.class, 5, "Pesho");
+
+
+
     }
 }
