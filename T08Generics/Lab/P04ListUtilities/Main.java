@@ -11,5 +11,9 @@ public class Main {
 
         System.out.println(ListUtils.getMax(list));
         System.out.println(ListUtils.getMin(list));
+
+        List<String> secondList = new ArrayList<>(Arrays.asList("first", "second", "third"));
+        System.out.println(ListUtils.getMax(secondList));
+        System.out.println(ListUtils.getMin(secondList));
     }
 }
