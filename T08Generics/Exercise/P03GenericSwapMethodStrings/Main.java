@@ -14,9 +14,8 @@ public class Main {
             box.add(element);
         }
 
-        String indeces = scanner.nextLine();
-        int firstElement = Integer.parseInt(indeces.split(" ")[0]);
-        int secondElement = Integer.parseInt(indeces.split(" ")[1]);
+        int firstElement = scanner.nextInt();
+        int secondElement = scanner.nextInt();
 
         box.swap(firstElement, secondElement);
 

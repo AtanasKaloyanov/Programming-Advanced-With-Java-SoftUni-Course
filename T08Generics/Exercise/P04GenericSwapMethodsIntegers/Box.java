@@ -7,19 +7,19 @@ public class Box<T> {
     private List<T> list;
 
     public Box() {
-        list = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
     public void add(T element) {
-        list.add(element);
+        this.list.add(element);
     }
 
     public void swap(int firstIndex, int secondIndex) {
-        T firstElement = list.get(firstIndex);
-        T secondElement = list.get(secondIndex);
+        T firstElement = this.list.get(firstIndex);
+        T secondElement = this.list.get(secondIndex);
 
-        list.set(firstIndex, secondElement);
-        list.set(secondIndex, firstElement);
+        this.list.set(firstIndex, secondElement);
+        this.list.set(secondIndex, firstElement);
     }
 
     @Override
