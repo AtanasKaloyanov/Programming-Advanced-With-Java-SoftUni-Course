@@ -1,4 +1,4 @@
-package T09IteratorsAndComparators.Lab.PComparatorExample;
+package T09IteratorsAndComparators.Lab.P04BookComparator;
 
 import java.util.List;
 
