@@ -32,6 +32,11 @@ public class ListyIterator implements Iterable<String>{
         }
     }
 
+    public void pritAll() {
+        list.stream().forEach(element -> System.out.print(element + " "));
+        System.out.println();
+    }
+
     @Override
     public Iterator<String> iterator() {
         return new Assistant();

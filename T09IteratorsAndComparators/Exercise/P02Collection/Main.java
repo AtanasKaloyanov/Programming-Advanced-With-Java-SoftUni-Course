@@ -13,8 +13,6 @@ public class Main {
         List<String> inputList = Arrays.stream(scanner.nextLine().split("\\s+")).skip(1).collect(Collectors.toList());
         ListyIterator listyIterator = new ListyIterator(inputList);
 
-        Iterator<String> it = listyIterator.iterator();
-
         String secondInput = scanner.nextLine();
 
         while (!secondInput.equals("END")) {
@@ -33,14 +31,10 @@ public class Main {
                     break;
 
                 case "PrintAll":
-                    while (it.hasNext()) {
-                        System.out.print(it.next() + " ");
-                    }
-                    System.out.println();
-
+                   listyIterator.pritAll();
             }
-
             secondInput = scanner.nextLine();
+
         }
     }
 }
