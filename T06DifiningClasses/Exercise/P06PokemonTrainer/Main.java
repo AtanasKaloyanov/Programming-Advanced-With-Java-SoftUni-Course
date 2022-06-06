@@ -42,27 +42,22 @@ public class Main {
                 }
 
                 if (!hasElement) {
-                    for (Pokemon pokemon : trainer.getPokemonList()) {
-                        pokemon.setHealth();
-                        if (pokemon.getHealth() <= 0) {
-                            trainer.getPokemonList().remove(pokemon);
-                            if (trainer.getPokemonList().isEmpty()) {
-                                break;
-                            }
-                        }
-                    }
+                    trainer.getPokemonList().forEach(pokemon -> pokemon.setHealth());
+                    trainer.getPokemonList().removeIf(pokemon -> pokemon.getHealth() <= 0);
                 }
+
+
             });
 
             secondInput = scanner.nextLine();
         }
 
-             map.entrySet().stream().sorted(
-                     (firstEntry, secondEntry) -> {
-                 int result = Integer.compare(secondEntry.getValue().getBadges(), firstEntry.getValue().getBadges() );
+        map.entrySet().stream().sorted(
+                (firstEntry, secondEntry) -> {
+                    int result = Integer.compare(secondEntry.getValue().getBadges(), firstEntry.getValue().getBadges());
 
-                         return result;
-             }).forEach(entry -> System.out.println(entry.getValue()));
+                    return result;
+                }).forEach(entry -> System.out.println(entry.getValue()));
 
     }
 }
