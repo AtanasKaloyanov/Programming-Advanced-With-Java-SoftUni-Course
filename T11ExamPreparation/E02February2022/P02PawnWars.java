@@ -13,6 +13,8 @@ public class P02PawnWars {
 
         int whiteRow = 0;
         int whiteColumn = 0;
+        int blackRow = 0;
+        int blackColumn = 0;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -20,17 +22,7 @@ public class P02PawnWars {
                 if (currentChar == 'w') {
                     whiteRow = i;
                     whiteColumn = j;
-                }
-            }
-        }
-
-        int blackRow = 0;
-        int blackColumn = 0;
-
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                char currentChar = matrix[i][j];
-                if (currentChar == 'b') {
+                } else if (currentChar == 'b') {
                     blackRow = i;
                     blackColumn = j;
                 }
@@ -42,46 +34,13 @@ public class P02PawnWars {
         int realRow = 0;
 
         while (whiteRow != 0 && blackRow != 7) {
-            if ((blackColumn == whiteColumn - 1 || blackColumn == whiteColumn + 1) && blackRow == whiteRow - 1) {
+            if (isHit(blackColumn, whiteColumn, blackRow, whiteRow)) {
                 isCaptured = true;
                 whiteRow = blackRow;
                 whiteColumn = blackColumn;
 
-                if (whiteColumn == 0) {
-                    realColumn = 'a';
-                } else if (whiteColumn == 1) {
-                    realColumn = 'b';
-                } else if (whiteColumn == 2) {
-                    realColumn = 'c';
-                } else if (whiteColumn == 3) {
-                    realColumn = 'd';
-                } else if (whiteColumn == 4) {
-                    realColumn = 'e';
-                } else if (whiteColumn == 5) {
-                    realColumn = 'f';
-                } else if (whiteColumn == 6) {
-                    realColumn = 'g';
-                } else if (whiteColumn == 7) {
-                    realColumn = 'h';
-                }
-
-                if (whiteRow == 0) {
-                    realRow = 8;
-                } else if (whiteRow == 1) {
-                    realRow = 7;
-                } else if (whiteRow == 2) {
-                    realRow = 6;
-                } else if (whiteRow == 3) {
-                    realRow = 5;
-                } else if (whiteRow == 4) {
-                    realRow = 4;
-                } else if (whiteRow == 5) {
-                    realRow = 3;
-                } else if (whiteRow == 6) {
-                    realRow = 2;
-                } else if (whiteRow == 7) {
-                    realRow = 1;
-                }
+                realColumn = setColumn(blackColumn, realColumn);
+                realRow = setRow(whiteRow, realRow);
 
                 System.out.printf("Game over! White capture on %c%d.", realColumn, realRow);
                 break;
@@ -91,46 +50,13 @@ public class P02PawnWars {
                 whiteRow--;
             }
 
-            if ((blackColumn == whiteColumn - 1 || blackColumn == whiteColumn + 1) && blackRow == whiteRow - 1) {
+            if (isHit(blackColumn, whiteColumn, blackRow, whiteRow)) {
                 isCaptured = true;
                 blackRow = whiteRow;
                 blackColumn = whiteColumn;
 
-                if (blackColumn == 0) {
-                    realColumn = 'a';
-                } else if (blackColumn == 1) {
-                    realColumn = 'b';
-                } else if (blackColumn == 2) {
-                    realColumn = 'c';
-                } else if (blackColumn == 3) {
-                    realColumn = 'd';
-                } else if (blackColumn == 4) {
-                    realColumn = 'e';
-                } else if (blackColumn == 5) {
-                    realColumn = 'f';
-                } else if (blackColumn == 6) {
-                    realColumn = 'g';
-                } else if (blackColumn == 7) {
-                    realColumn = 'h';
-                }
-
-                if (blackRow == 0) {
-                    realRow = 8;
-                } else if (blackRow == 1) {
-                    realRow = 7;
-                } else if (blackRow == 2) {
-                    realRow = 6;
-                } else if (blackRow == 3) {
-                    realRow = 5;
-                } else if (blackRow == 4) {
-                    realRow = 4;
-                } else if (blackRow == 5) {
-                    realRow = 3;
-                } else if (blackRow == 6) {
-                    realRow = 2;
-                } else if (blackRow == 7) {
-                    realRow = 1;
-                }
+                realColumn = setColumn(blackColumn, realColumn);
+                realRow = setRow(whiteRow, realRow);
 
                 System.out.printf("Game over! Black capture on %c%d.", realColumn, realRow);
                 break;
@@ -138,57 +64,68 @@ public class P02PawnWars {
                 matrix[blackRow][blackColumn] = '-';
                 blackRow++;
             }
-
-
         }
 
         if (!isCaptured) {
             if (whiteRow == 0) {
 
-                if (whiteColumn == 0) {
-                    realColumn = 'a';
-                } else if (whiteColumn == 1) {
-                    realColumn = 'b';
-                } else if (whiteColumn == 2) {
-                    realColumn = 'c';
-                } else if (whiteColumn == 3) {
-                    realColumn = 'd';
-                } else if (whiteColumn == 4) {
-                    realColumn = 'e';
-                } else if (whiteColumn == 5) {
-                    realColumn = 'f';
-                } else if (whiteColumn == 6) {
-                    realColumn = 'g';
-                } else if (whiteColumn == 7) {
-                    realColumn = 'h';
-                }
-
-                    realRow = 8;
+                realColumn = setColumn(whiteColumn, realColumn);
+                realRow = 8;
 
                 System.out.printf("Game over! White pawn is promoted to a queen at %c%d.", realColumn, realRow);
             } else if (blackRow == 7) {
-                if (blackColumn == 0) {
-                    realColumn = 'a';
-                } else if (blackColumn == 1) {
-                    realColumn = 'b';
-                } else if (blackColumn == 2) {
-                    realColumn = 'c';
-                } else if (blackColumn == 3) {
-                    realColumn = 'd';
-                } else if (blackColumn == 4) {
-                    realColumn = 'e';
-                } else if (blackColumn == 5) {
-                    realColumn = 'f';
-                } else if (blackColumn == 6) {
-                    realColumn = 'g';
-                } else if (blackColumn == 7) {
-                    realColumn = 'h';
-                }
 
+                realColumn = setColumn(blackColumn, realColumn);
                 realRow = 1;
+
                 System.out.printf("Game over! Black pawn is promoted to a queen at %c%d.", realColumn, realRow);
             }
         }
+    }
 
+    public static boolean isHit(int blackColumn, int whiteColumn, int blackRow, int whiteRow) {
+        return ((blackColumn == whiteColumn - 1 || blackColumn == whiteColumn + 1) && blackRow == whiteRow - 1);
+    }
+
+    public static char setColumn(int currentColumn, char realColumn) {
+        if (currentColumn == 0) {
+            realColumn = 'a';
+        } else if (currentColumn == 1) {
+            realColumn = 'b';
+        } else if (currentColumn == 2) {
+            realColumn = 'c';
+        } else if (currentColumn == 3) {
+            realColumn = 'd';
+        } else if (currentColumn == 4) {
+            realColumn = 'e';
+        } else if (currentColumn == 5) {
+            realColumn = 'f';
+        } else if (currentColumn == 6) {
+            realColumn = 'g';
+        } else if (currentColumn == 7) {
+            realColumn = 'h';
+        }
+        return realColumn;
+    }
+
+    public static int setRow(int currentRow, int realRow) {
+        if (currentRow == 0) {
+            realRow = 8;
+        } else if (currentRow == 1) {
+            realRow = 7;
+        } else if (currentRow == 2) {
+            realRow = 6;
+        } else if (currentRow == 3) {
+            realRow = 5;
+        } else if (currentRow == 4) {
+            realRow = 4;
+        } else if (currentRow == 5) {
+            realRow = 3;
+        } else if (currentRow == 6) {
+            realRow = 2;
+        } else if (currentRow == 7) {
+            realRow = 1;
+        }
+        return realRow;
     }
 }
