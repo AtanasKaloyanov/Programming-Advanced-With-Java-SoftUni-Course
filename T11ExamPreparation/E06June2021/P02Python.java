@@ -1,4 +1,4 @@
-package T11ExamPreparation.E06June;
+package T11ExamPreparation.E06June2021;
 import java.util.Scanner;
 
 public class P02Python {
@@ -112,6 +112,7 @@ public class P02Python {
                         matrix[pythonRow][pythonColumn] = 's';
                         pythonLength++;
                     }
+
                     break;
             }
 
