@@ -6,10 +6,11 @@ public class P02MouseAndCheese {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int rows = Integer.parseInt(scanner.nextLine());
-        char[][] matrix = new char[rows][];
+        int rowsAndColumns = Integer.parseInt(scanner.nextLine());
 
-        for (int i = 0; i < rows; i++) {
+        char[][] matrix = new char[rowsAndColumns][rowsAndColumns];
+
+        for (int i = 0; i < rowsAndColumns; i++) {
             char[] array = scanner.nextLine().toCharArray();
             matrix[i] = array;
         }
@@ -17,8 +18,8 @@ public class P02MouseAndCheese {
         int mouseRow = 0;
         int mouseColumn = 0;
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+        for (int i = 0; i < rowsAndColumns; i++) {
+            for (int j = 0; j < rowsAndColumns; j++) {
                 char currentChar = matrix[i][j];
                 if (currentChar == 'M') {
                     mouseRow = i;
@@ -27,121 +28,116 @@ public class P02MouseAndCheese {
             }
         }
 
-        String command = scanner.nextLine();
         boolean out = false;
         int cheeseCounter = 0;
+
+        String command = scanner.nextLine();
 
         while (!command.equals("end")) {
             switch (command) {
                 case "up":
-                    if (mouseRow - 1 < 0) {
-                        matrix[mouseRow][mouseColumn] = '-';
+                    matrix[mouseRow][mouseColumn] = '-';
+
+                    if (mouseRow - 1 == -1) {
                         out = true;
                         break;
                     } else {
-                        matrix[mouseRow][mouseColumn] = '-';
-                        mouseRow -= 1;
+                        mouseRow--;
                         if (matrix[mouseRow][mouseColumn] == 'c') {
                             matrix[mouseRow][mouseColumn] = 'M';
                             cheeseCounter++;
                         } else if (matrix[mouseRow][mouseColumn] == 'B') {
                             matrix[mouseRow][mouseColumn] = '-';
-                            mouseRow -= 1;
+                            mouseRow--;
+
                             if (matrix[mouseRow][mouseColumn] == 'c') {
                                 cheeseCounter++;
-                                matrix[mouseRow][mouseColumn] = 'M';
-                            } else {
-                                matrix[mouseRow][mouseColumn] = 'M';
                             }
+
+                            matrix[mouseRow][mouseColumn] = 'M';
                         } else if (matrix[mouseRow][mouseColumn] == '-') {
                             matrix[mouseRow][mouseColumn] = 'M';
                         }
-
                     }
                     break;
 
                 case "down":
-                    if (mouseRow + 1 >= matrix.length) {
+                    matrix[mouseRow][mouseColumn] = '-';
+
+                    if (mouseRow + 1 == rowsAndColumns) {
                         out = true;
-                        matrix[mouseRow][mouseColumn] = '-';
                         break;
                     } else {
-                        matrix[mouseRow][mouseColumn] = '-';
-                        mouseRow += 1;
-
+                        mouseRow++;
                         if (matrix[mouseRow][mouseColumn] == 'c') {
                             matrix[mouseRow][mouseColumn] = 'M';
                             cheeseCounter++;
                         } else if (matrix[mouseRow][mouseColumn] == 'B') {
                             matrix[mouseRow][mouseColumn] = '-';
-                            mouseRow += 1;
+                            mouseRow++;
+
                             if (matrix[mouseRow][mouseColumn] == 'c') {
                                 cheeseCounter++;
-                                matrix[mouseRow][mouseColumn] = 'M';
-                            } else {
-                                matrix[mouseRow][mouseColumn] = 'M';
                             }
+
+                            matrix[mouseRow][mouseColumn] = 'M';
                         } else if (matrix[mouseRow][mouseColumn] == '-') {
                             matrix[mouseRow][mouseColumn] = 'M';
                         }
-
                     }
                     break;
 
                 case "left":
-                    if (mouseColumn - 1 < 0) {
+                    matrix[mouseRow][mouseColumn] = '-';
+
+                    if (mouseColumn - 1 == -1) {
                         out = true;
-                        matrix[mouseRow][mouseColumn] = '-';
                         break;
                     } else {
-                        matrix[mouseRow][mouseColumn] = '-';
-                        mouseColumn -= 1;
+                        mouseColumn--;
                         if (matrix[mouseRow][mouseColumn] == 'c') {
                             matrix[mouseRow][mouseColumn] = 'M';
                             cheeseCounter++;
                         } else if (matrix[mouseRow][mouseColumn] == 'B') {
                             matrix[mouseRow][mouseColumn] = '-';
-                            mouseColumn -= 1;
+                            mouseColumn--;
+
                             if (matrix[mouseRow][mouseColumn] == 'c') {
                                 cheeseCounter++;
-                                matrix[mouseRow][mouseColumn] = 'M';
-                            } else {
-                                matrix[mouseRow][mouseColumn] = 'M';
                             }
+
+                            matrix[mouseRow][mouseColumn] = 'M';
                         } else if (matrix[mouseRow][mouseColumn] == '-') {
                             matrix[mouseRow][mouseColumn] = 'M';
                         }
-
                     }
                     break;
 
                 case "right":
-                    if (mouseColumn + 1 >= matrix[mouseRow].length) {
+                    matrix[mouseRow][mouseColumn] = '-';
+
+                    if (mouseColumn + 1 == rowsAndColumns) {
                         out = true;
-                        matrix[mouseRow][mouseColumn] = '-';
                         break;
                     } else {
-                        matrix[mouseRow][mouseColumn] = '-';
-                        mouseColumn += 1;
+                        mouseColumn++;
                         if (matrix[mouseRow][mouseColumn] == 'c') {
                             matrix[mouseRow][mouseColumn] = 'M';
                             cheeseCounter++;
                         } else if (matrix[mouseRow][mouseColumn] == 'B') {
                             matrix[mouseRow][mouseColumn] = '-';
-                            mouseColumn += 1;
+                            mouseColumn++;
+
                             if (matrix[mouseRow][mouseColumn] == 'c') {
                                 cheeseCounter++;
-                                matrix[mouseRow][mouseColumn] = 'M';
-                            } else {
-                                matrix[mouseRow][mouseColumn] = 'M';
                             }
+
+                            matrix[mouseRow][mouseColumn] = 'M';
                         } else if (matrix[mouseRow][mouseColumn] == '-') {
                             matrix[mouseRow][mouseColumn] = 'M';
                         }
-
                     }
                     break;
-
             }
 
             if (out) {
@@ -149,25 +145,24 @@ public class P02MouseAndCheese {
             }
 
             command = scanner.nextLine();
-
         }
 
         if (out) {
             System.out.println("Where is the mouse?");
         }
 
-        if (cheeseCounter < 5) {
-            int neededCheese = 5 - cheeseCounter;
-            System.out.printf("The mouse couldn't eat the cheeses, she needed %d cheeses more.%n", neededCheese);
+        if (cheeseCounter >= 5) {
+            System.out.printf("Great job, the mouse is fed %d cheeses!%n", cheeseCounter);
         } else {
-            System.out.printf("Great job the mouse is fed %d cheeses%n", cheeseCounter);
+            System.out.printf("The mouse couldn't eat the cheeses, she needed %d cheeses more.%n", 5 - cheeseCounter);
         }
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+        for (int i = 0; i < rowsAndColumns; i++) {
+            for (int j = 0; j < rowsAndColumns; j++) {
                 System.out.print(matrix[i][j]);
             }
             System.out.println();
         }
     }
 }
+
