@@ -41,7 +41,15 @@ public class P02ReVolt {
                         playerRow = rowsAndColumns - 1;
                         if (matrix[playerRow][playerColumn] == 'B') {
                             playerRow -= 1;
-                            matrix[playerRow][playerColumn] = 'f';
+
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
+
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerRow = 0;
                             matrix[playerRow][playerColumn] = 'f';
@@ -57,11 +65,26 @@ public class P02ReVolt {
                         playerRow -= 1;
                         if (matrix[playerRow][playerColumn] == 'B' && playerRow - 1 >= 0) {
                             playerRow -= 1;
-                            matrix[playerRow][playerColumn] = 'f';
+
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
 
                         } else if (matrix[playerRow][playerColumn] == 'B' && playerRow - 1 < 0) {
                             playerRow = rowsAndColumns - 1;
-                            matrix[playerRow][playerColumn] = 'f';
+
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
+
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerRow += 1;
                             matrix[playerRow][playerColumn] = 'f';
@@ -81,7 +104,13 @@ public class P02ReVolt {
                         playerRow = 0;
                         if (matrix[playerRow][playerColumn] == 'B') {
                             playerRow = 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerRow = rowsAndColumns - 1;
                             matrix[playerRow][playerColumn] = 'f';
@@ -97,11 +126,23 @@ public class P02ReVolt {
                         playerRow += 1;
                         if (matrix[playerRow][playerColumn] == 'B' && playerRow + 1 < rowsAndColumns) {
                             playerRow += 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
 
                         } else if (matrix[playerRow][playerColumn] == 'B' && playerRow + 1 == rowsAndColumns) {
                             playerRow = 0;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerRow -= 1;
                             matrix[playerRow][playerColumn] = 'f';
@@ -121,7 +162,13 @@ public class P02ReVolt {
                         playerColumn = rowsAndColumns - 1;
                         if (matrix[playerRow][playerColumn] == 'B') {
                             playerColumn -= 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerColumn = 0;
                             matrix[playerRow][playerColumn] = 'f';
@@ -137,11 +184,25 @@ public class P02ReVolt {
                         playerColumn -= 1;
                         if (matrix[playerRow][playerColumn] == 'B' && playerColumn - 1 >= 0) {
                             playerColumn -= 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
 
                         } else if (matrix[playerRow][playerColumn] == 'B' && playerColumn - 1 < 0) {
                             playerColumn = rowsAndColumns - 1;
-                            matrix[playerRow][playerColumn] = 'f';
+
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
+                            
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerColumn += 1;
                             matrix[playerRow][playerColumn] = 'f';
@@ -161,7 +222,13 @@ public class P02ReVolt {
                         playerColumn = 0;
                         if (matrix[playerRow][playerColumn] == 'B') {
                             playerColumn = 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerColumn = rowsAndColumns - 1;
                             matrix[playerRow][playerColumn] = 'f';
@@ -177,14 +244,32 @@ public class P02ReVolt {
                         playerColumn += 1;
                         if (matrix[playerRow][playerColumn] == 'B' && playerColumn + 1 < rowsAndColumns) {
                             playerColumn += 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
 
                         } else if (matrix[playerRow][playerColumn] == 'B' && playerRow + 1 == rowsAndColumns) {
                             playerColumn = 0;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
                         } else if (matrix[playerRow][playerColumn] == 'T') {
                             playerColumn -= 1;
-                            matrix[playerRow][playerColumn] = 'f';
+                            if (matrix[playerRow][playerColumn] == 'F') {
+                                matrix[playerRow][playerColumn] = 'f';
+                                win = true;
+                                break;
+                            }  else {
+                                matrix[playerRow][playerColumn] = 'f';
+                            }
                         } else if (matrix[playerRow][playerColumn] == '-') {
                             matrix[playerRow][playerColumn] = 'f';
                         } else if (matrix[playerRow][playerColumn] == 'F') {
