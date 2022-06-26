@@ -2,17 +2,18 @@ package T10Algorithms;
 
 public class PRecursionExample {
     public static void main(String[] args) {
-        f(3);
+        recursionExample(3);
     }
 
-    public static void f(int counter) {
+    public static void recursionExample(int counter) {
+
         if (counter == 0) {
             return;
         }
 
-        System.out.println("Before");
+        System.out.println("Printing before the base case");
         counter--;
-        f(counter);
-        System.out.println("After");
+        recursionExample(counter);
+        System.out.println("Printing after the base case");
     }
 }
