@@ -2,7 +2,7 @@ package T10Algorithms;
 
 import java.util.Scanner;
 
-public class PRecursiveFactorial {
+public class P02RecursiveFactorial {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int number = Integer.parseInt(scanner.nextLine());
@@ -11,14 +11,12 @@ public class PRecursiveFactorial {
     }
 
     public static int factorialCalculation(int number) {
-        int numberBeforeReducing = number;
-        number--;
 
         if (number == 0) {
             return 1;
         }
 
-        return numberBeforeReducing * factorialCalculation(number);
+        return number * factorialCalculation(number - 1);
     }
 
 }
