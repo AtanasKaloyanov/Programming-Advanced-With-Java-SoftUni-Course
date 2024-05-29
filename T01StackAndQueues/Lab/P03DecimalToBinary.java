@@ -4,20 +4,26 @@ import java.util.Scanner;
 
 public class P03DecimalToBinary {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
-        int givenNumber = Integer.parseInt(scanner.nextLine());
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        int number = Integer.parseInt(scanner.nextLine());
 
-        while (givenNumber != 0) {
-            int remainder = givenNumber % 2;
-            stack.push(remainder);
-            givenNumber = givenNumber / 2;
-        }
-
-        if (stack.isEmpty()) {
+        // 2.  0 case - printing and return:
+        if (number == 0) {
             System.out.println(0);
-        } else {
-            System.out.println(stack.toString().replaceAll("[\\[\\], ]", ""));
+            return;
         }
+
+        // 3. Binary number representation algorithm via ArrayDeque
+        ArrayDeque<Integer> binaryRepresentation = new ArrayDeque<>();
+
+        while (number != 0) {
+            int currentReminder = number % 2;
+            binaryRepresentation.push(currentReminder);
+            number /= 2;
+        }
+
+        // 4. The binary number representation printing
+        System.out.println(binaryRepresentation.toString().replaceAll("[\\[\\], ]", ""));
     }
 }

@@ -1,38 +1,35 @@
 package T01StackAndQueues.Lab;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class P06HotPotato {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        int passes = Integer.parseInt(scanner.nextLine());
-        String[] array = input.split(" ");
-        ArrayDeque<String> kids = new ArrayDeque<>();
-        Collections.addAll(kids, array);
+        ArrayDeque<String> queue = getArrayDeque(scanner);
+        int n = Integer.parseInt(scanner.nextLine());
 
-        while (kids.size() > 1) {
-            for (int i = 1; i < passes; i++) {
-                String potatoHolder = kids.peek();
-                kids.offer(potatoHolder);
-                kids.poll();
+        // 2. The firstElement becomes last n times. This is happening until the
+        // length of the queue is greater than 1
+        while (queue.size() > 1) {
+            for (int i = 0; i < n - 1; i++) {
+                String elementOnTheTop = queue.poll();
+                queue.offer(elementOnTheTop);
             }
-            String leavingKid = kids.peek();
-            kids.poll();
-            System.out.printf("Removed %s%n", leavingKid);
+
+            String removedElement = queue.poll();
+            System.out.printf("Removed %s\n", removedElement);
         }
-        String lastKid = kids.peek();
-        System.out.printf("Last is %s", lastKid);
+
+        // 3. Printing the last element
+        String lastElement = queue.peek();
+        System.out.printf("Last is %s", lastElement);
+    }
+
+    private static ArrayDeque<String> getArrayDeque(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .collect(Collectors.toCollection(ArrayDeque::new));
     }
 }
 
-// 1    2
-//Sam John Sarah   -->  John
-
-// 2    1
-//Sam Sarah    --> Sam
-
-//Sarah     -->   Sarah
