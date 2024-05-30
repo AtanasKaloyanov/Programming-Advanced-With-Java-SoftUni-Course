@@ -1,52 +1,41 @@
 package T01StackAndQueues.Exercise;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class P02BasicStackOperations {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
-        List<Integer> list = Arrays.stream(scanner.nextLine().split(" "))
-                .map(e -> Integer.parseInt(e))
-                .collect(Collectors.toList());
+        int[] numbers = numbersReading(scanner);
+        int n = numbers[0];
+        int s = numbers[1];
+        int x = numbers[2];
 
-        int allElementsNumber = list.get(0);
-        int elementsForDeleting = list.get(1);
-        int elementForChecking = list.get(2);
-
-        List<Integer> numbers = Arrays.stream(scanner.nextLine().split(" "))
-                .map(e -> Integer.parseInt(e))
-                .collect(Collectors.toList());
-
+        // 2. Adding the input into a stack
         ArrayDeque<Integer> stack = new ArrayDeque<>();
+        Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .limit(n - s)
+                .forEach(stack::push);
 
-        for (int i = 0; i < allElementsNumber; i++) {
-            stack.push(numbers.get(i));
-        }
-
-        for (int i = 1; i <= elementsForDeleting; i++) {
-            stack.pop();
-        }
-
+        // 3. Output printing - 3 cases:
         if (stack.isEmpty()) {
             System.out.println(0);
         } else {
-            if (stack.contains(elementForChecking)) {
-                System.out.println("true");
+            if (stack.contains(x)) {
+                System.out.println(true);
             } else {
-                int smallest = Integer.MAX_VALUE;
-
-                while (stack.size() > 0) {
-                    int current = stack.pop();
-                    if (current < smallest) {
-                        smallest = current;
-                    }
-                }
-                System.out.println(smallest);
+                int searchedNumber = Collections.max(stack);
+                System.out.println(searchedNumber);
             }
         }
+
+    }
+
+    private static int[] numbersReading(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 }

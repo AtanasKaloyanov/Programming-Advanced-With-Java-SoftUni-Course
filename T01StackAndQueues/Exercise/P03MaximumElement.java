@@ -6,33 +6,29 @@ import java.util.Scanner;
 
 public class P03MaximumElement {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
 
-        int numberCommands = Integer.parseInt(scanner.nextLine());
+        // 2. Commands implementations - 3 cases:
         ArrayDeque<Integer> stack = new ArrayDeque<>();
-
-        for (int i = 1; i <= numberCommands; i++) {
-            String[] array = scanner.nextLine().split(" ");
-            String currentCommand = array[0];
-
-            switch (currentCommand) {
-                case "1":
-                    int elementForPushing = Integer.parseInt(array[1]);
-                    stack.push(elementForPushing);
-                    break;
-
+        for (int i = 0; i < n; i++) {
+            String currentInput = scanner.nextLine();
+            switch (currentInput) {
                 case "2":
                     stack.pop();
                     break;
-
                 case "3":
-                    if (stack.isEmpty()) {
-                        System.out.println(0);
-                    } else {
-                        System.out.println(Collections.max(stack));
-                    }
+                    int maxElement = Collections.max(stack);
+                    System.out.println(maxElement);
+                    break;
+                default:
+                    String[] array = currentInput.split(" ");
+                    int element = Integer.parseInt(array[1]);
+                    stack.push(element);
                     break;
             }
         }
+
     }
 }

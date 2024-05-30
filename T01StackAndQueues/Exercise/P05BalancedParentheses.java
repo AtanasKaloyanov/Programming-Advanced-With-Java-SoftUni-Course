@@ -15,7 +15,7 @@ public class P05BalancedParentheses {
             char currentChar = input.charAt(i);
             if (currentChar == '(' || currentChar == '[' || currentChar == '{') {
                 stack.push(currentChar);
-            } else if (currentChar == ')' || currentChar == ']' || currentChar == '}'){
+            } else if (currentChar == ')' || currentChar == ']' || currentChar == '}') {
 
                 if (stack.isEmpty()) {
                     isBalanced = false;
