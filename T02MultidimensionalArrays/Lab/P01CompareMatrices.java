@@ -5,66 +5,58 @@ import java.util.Scanner;
 
 public class P01CompareMatrices {
     public static void main(String[] args) {
+        // 1. Reading the dimensions of the first matrix and initializing it.
         Scanner scanner = new Scanner(System.in);
 
-        String[] firstInput = scanner.nextLine().split(" ");
-        int firstMatrixRows = Integer.parseInt(firstInput[0]);
-        int firstMatrixColums = Integer.parseInt(firstInput[1]);
+        int[] dimensions1 = readRow(scanner);
+        int rows1 = dimensions1[0];
+        int columns1 = dimensions1[1];
 
-        int[][] firstMatrix = new int[firstMatrixRows][firstMatrixColums];
+        int[][] matrix1 = new int[rows1][columns1];
+        matrix1 = readMatrix(scanner, rows1, columns1, matrix1);
 
-        for (int i = 0; i < firstMatrixRows; i++) {
-            int[] firstArray = Arrays.stream(scanner.nextLine().split("\\s+"))
-                    .mapToInt(e -> Integer.parseInt(e))
-                    .toArray();
+        // 1.2. Matrix 2
+        int[] dimensions2 = readRow(scanner);
+        int rows2 = dimensions2[0];
+        int columns2 = dimensions2[1];
 
-            for (int j = 0; j < firstMatrixColums; j++) {
-                firstMatrix[i][j] = firstArray[j];
-            }
-        }
-
-        String[] secondInput = scanner.nextLine().split(" ");
-        int secondMtrixRows = Integer.parseInt(secondInput[0]);
-        int secondMatrixColums = Integer.parseInt(secondInput[1]);
-
-        if (firstMatrixRows != secondMtrixRows || firstMatrixColums != secondMatrixColums) {
+        // 2. Comparing of the dimensions
+        if (rows1 != rows2 || columns1 != columns2) {
             System.out.println("not equal");
             return;
         }
 
-        int[][] secondMatrix = new int[secondMtrixRows][secondMatrixColums];
+        // 3. The matrices are with equal dimensions therefore comparing of every element
+        for (int i = 0; i < rows2; i++) {
+            int[] currentRow2 = readRow(scanner);
+            for (int j = 0; j < columns2; j++) {
+                int element1 = matrix1[i][j];
+                int element2 = currentRow2[j];
 
-        for (int i = 0; i < secondMtrixRows; i++) {
-            int[] secondArray = Arrays.stream(scanner.nextLine().split("\\s+"))
-                    .mapToInt(e -> Integer.parseInt(e))
-                    .toArray();
-
-            for (int j = 0; j < secondMatrixColums; j++) {
-                secondMatrix[i][j] = secondArray[j];
+                if (element1 != element2) {
+                    System.out.println("not equal");
+                    return;
+                }
             }
         }
 
-        boolean notEquals = false;
+        // 4. Printing the last case - the matrices are equal
+        System.out.println("equal");
+    }
 
-            for (int i = 0; i < firstMatrixRows; i++) {
-                for (int j = 0; j < firstMatrixColums; j++) {
-                    int currentFirstMatrix = firstMatrix[i][j];
-                    int currentSecondMatrix = secondMatrix[i][j];
-
-                    if (currentFirstMatrix != currentSecondMatrix) {
-                        notEquals = true;
-                        break;
-                    }
-                }
-                if (notEquals) {
-                    break;
-                }
+    private static int[][] readMatrix(Scanner scanner, int rows1, int columns1, int[][] matrix) {
+        for (int i = 0; i < rows1; i++) {
+            int[] currentRow = readRow(scanner);
+            for (int j = 0; j < columns1; j++) {
+                matrix[i][j] = currentRow[j];
             }
+        }
+        return matrix;
+    }
 
-if (notEquals) {
-    System.out.println("not equal");
-} else {
-    System.out.println("equal");
-}
+    private static int[] readRow(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 }
