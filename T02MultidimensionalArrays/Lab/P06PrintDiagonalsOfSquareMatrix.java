@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class P06PrintDiagonalsOfSquareMatrix {
     public static void main(String[] args) {
+        // 1. Matrix filling
         Scanner scanner = new Scanner(System.in);
-
         int rowsAndColumns = Integer.parseInt(scanner.nextLine());
         int[][] matrix = new int[rowsAndColumns][rowsAndColumns];
 
@@ -16,11 +16,15 @@ public class P06PrintDiagonalsOfSquareMatrix {
             }
         }
 
+        // 2. Diagonal 1 printing
         for (int i = 0; i < rowsAndColumns; i++) {
             System.out.print(matrix[i][i] + " ");
         }
+
+        // 3. New line
         System.out.println();
 
+        // 4 Diagonal 2 printing
         for (int i = 0; i < rowsAndColumns; i++) {
             System.out.print(matrix[rowsAndColumns - i - 1][i] + " ");
         }
