@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 public class P01FillTheMatrix {
     public static void main(String[] args) {
+        // 1. Dimensions and pattern reading
         Scanner scanner = new Scanner(System.in);
-
         String[] array = scanner.nextLine().split(", ");
         int rowsAndColumns = Integer.parseInt(array[0]);
         String pattern = array[1];
         int[][] matrix = new int[rowsAndColumns][rowsAndColumns];
 
+        // 2. 2 patterns means 2 cases:
         if (pattern.equals("A")) {
             fillingMatrixWithPatterA(matrix);
 
@@ -18,6 +19,7 @@ public class P01FillTheMatrix {
             fillingMatrixWithPatterB(matrix);
         }
 
+        // 3. Output printing
         prntMatrix(matrix);
     }
 
