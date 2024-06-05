@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class P04MaximalSum {
     public static void main(String[] args) {
+        // 1. Matrix reading
         Scanner scanner = new Scanner(System.in);
-
         String[] rowsAndColumns = scanner.nextLine().split(" ");
         int rows = Integer.parseInt(rowsAndColumns[0]);
         int columns = Integer.parseInt(rowsAndColumns[1]);
@@ -13,6 +13,7 @@ public class P04MaximalSum {
         int[][] matrix = new int[rows][columns];
         fillMatrix(matrix, scanner, columns);
 
+        // 2. Best sum, best row and best column finding
         int bestSum = Integer.MIN_VALUE;
         int bestRow = 0;
         int bestColumn = 0;
@@ -39,6 +40,8 @@ public class P04MaximalSum {
                 }
             }
         }
+
+        // 3. Best sum and best submatrix printing
         System.out.printf("Sum = %d%n", bestSum);
         printFinalMatrix(matrix, bestRow, bestColumn);
     }
