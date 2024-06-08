@@ -6,71 +6,67 @@ public class P08TheHeiganDance {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        double hsPoints = 3000000.0;
-        int playerPoints = 18500;
+        double haiganHealth = 3_000_000;
+        int playerHealth = 18_500;
 
-        int startPlRow = 7;
-        int startPlCol = 7;
+        int playerRow = 7;
+        int playerColumn = 7;
 
         String lastSpell = "";
         boolean activeCloud = false;
 
         double damage = Double.parseDouble(scanner.nextLine());
 
-        while (playerPoints > 0 && hsPoints > 0) {
-            hsPoints -= damage;
+        while (playerHealth > 0 && haiganHealth > 0) {
+            haiganHealth -= damage;
 
             if (activeCloud) {
-                playerPoints -= 3500;
+                playerHealth -= 3500;
                 activeCloud = false;
-
-                if (playerPoints < 0) {
-                    break;
-                }
             }
 
-            if (hsPoints < 0) {
+            if (playerHealth <= 0 || haiganHealth <= 0) {
                 break;
             }
 
-            String[] tokens = scanner.nextLine().split("\\s+");
+            String[] array = scanner.nextLine().split("\\s+");
 
-            String spell = tokens[0];
-            int row = Integer.parseInt(tokens[1]);
-            int col = Integer.parseInt(tokens[2]);
+            String spell = array[0];
+            int magigRow = Integer.parseInt(array[1]);
+            int magicColumn = Integer.parseInt(array[2]);
 
-           boolean[][] hsChamber = new boolean[15][15];
-            for (int i = row - 1; i <= row + 1; i++) {
-                if (i >= 0 && i < hsChamber.length) {
-                    for (int j = col - 1; j <= col + 1; j++) {
-                        if (j >= 0 && j < hsChamber[row].length) {
-                            hsChamber[i][j] = true;
+            boolean[][] matrix = new boolean[15][15];
+            for (int i = magigRow - 1; i <= magigRow + 1; i++) {
+                if (i >= 0 && i < 15) {
+                    for (int j = magicColumn - 1; j <= magicColumn + 1; j++) {
+                        if (j >= 0 && j < 15) {
+                            matrix[i][j] = true;
                         }
                     }
                 }
             }
 
-            if (hsChamber[startPlRow][startPlCol]) {
-                if (isRowValid(hsChamber, startPlRow - 1) && !hsChamber[startPlRow - 1][startPlCol]) {
-                    startPlRow--; // move up
-                } else if (isColValid(hsChamber, startPlCol + 1) && !hsChamber[startPlRow][startPlCol + 1]) {
-                    startPlCol++; // move right
-                } else if (isRowValid(hsChamber, startPlRow + 1) && !hsChamber[startPlRow + 1][startPlCol]) {
-                    startPlRow++; // move down
-                } else if (isColValid(hsChamber, startPlCol - 1) && !hsChamber[startPlRow][startPlCol - 1]) {
-                    startPlCol--; // move left
+            if (matrix[playerRow][playerColumn]) {
+                if (isRowValid(matrix, playerRow - 1) && !matrix[playerRow - 1][playerColumn]) {
+                    playerRow--; // move up
+                } else if (isColumnValid(matrix, playerColumn + 1) && !matrix[playerRow][playerColumn + 1]) {
+                    playerColumn++; // move right
+                } else if (isRowValid(matrix, playerRow + 1) && !matrix[playerRow + 1][playerColumn]) {
+                    playerRow++; // move down
+                } else if (isColumnValid(matrix, playerColumn - 1) && !matrix[playerRow][playerColumn - 1]) {
+                    playerColumn--; // move left
                 }
 
-                if (hsChamber[startPlRow][startPlCol]) {
+                if (matrix[playerRow][playerColumn]) {
                     switch (spell) {
                         case "Cloud":
-                            playerPoints -= 3500;
+                            playerHealth -= 3500;
                             activeCloud = true;
                             lastSpell = "Plague Cloud";
                             break;
                         case "Eruption":
-                            playerPoints -= 6000;
-                            lastSpell = spell;
+                            playerHealth -= 6000;
+                            lastSpell = "Eruption";
                             break;
                         default:
                             throw new IllegalArgumentException("Invalid spell: " + spell);
@@ -79,26 +75,26 @@ public class P08TheHeiganDance {
             }
         }
 
-        if (hsPoints > 0) {
-            System.out.printf("Heigan: %.2f%n", hsPoints);
+        if (haiganHealth > 0) {
+            System.out.printf("Heigan: %.2f%n", haiganHealth);
         } else {
             System.out.println("Heigan: Defeated!");
         }
-        if (playerPoints > 0) {
-            System.out.printf("Player: %d%n", playerPoints);
+        if (playerHealth > 0) {
+            System.out.printf("Player: %d%n", playerHealth);
         } else {
             System.out.println("Player: Killed by " + lastSpell);
         }
 
-        System.out.println("Final position: " + startPlRow + ", " + startPlCol);
+        System.out.println("Final position: " + playerRow + ", " + playerColumn);
     }
 
-    private static boolean isRowValid(boolean[][] hsChamber, int startPlRow) {
-        return startPlRow >= 0 && startPlRow < hsChamber[startPlRow].length;
+    private static boolean isRowValid(boolean[][] matrix, int playerRow) {
+        return playerRow >= 0 && playerRow < 15;
     }
 
-    private static boolean isColValid(boolean[][] hsChamber, int startPlCol) {
-        return startPlCol >= 0 && startPlCol < hsChamber.length;
+    private static boolean isColumnValid(boolean[][] matrix, int playerColumn) {
+        return playerColumn >= 0 && playerColumn < 15;
     }
 
 }
