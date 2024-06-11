@@ -4,35 +4,35 @@ import java.util.*;
 
 public class P01ParkingLot {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
 
-        Set<String> parking = new LinkedHashSet<>();
+        // 2. Commands implementation in Set. 2 cases - adding and removing:
+        Set<String> carNumbers = new LinkedHashSet<>();
+        while (!line.equals("END")) {
+            String[] currentArray = line.split(", ");
+            String currentCommand = currentArray[0];
+            String currentCarNumber = currentArray[1];
 
-        String input = scanner.nextLine();
-        while (!input.equals("END")) {
-            String[] array = input.split(", ");
-            String command = array[0];
-            String carNumber = array[1];
-
-            switch (command) {
+            switch (currentCommand) {
                 case "IN":
-                    parking.add(carNumber);
+                    carNumbers.add(currentCarNumber);
                     break;
 
                 case "OUT":
-                    parking.remove(carNumber);
+                    carNumbers.remove(currentCarNumber);
                     break;
             }
 
-            input = scanner.nextLine();
+            line = scanner.nextLine();
         }
 
-        if (parking.isEmpty()) {
+        // 3. Car numbers printing: 2 cases:
+        if (carNumbers.isEmpty()) {
             System.out.println("Parking Lot is Empty");
         } else {
-            for (String currentCar : parking) {
-                System.out.println(currentCar);
-            }
+            carNumbers.forEach(System.out::println);
         }
     }
 }
