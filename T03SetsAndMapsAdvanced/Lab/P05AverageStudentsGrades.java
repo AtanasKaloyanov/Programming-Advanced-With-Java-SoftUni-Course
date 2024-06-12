@@ -4,42 +4,47 @@ import java.util.*;
 
 public class P05AverageStudentsGrades {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
 
-        int number = Integer.parseInt(scanner.nextLine());
-        Map<String, List<Double>> students = new LinkedHashMap<>();
+        // 2. Adding the grades into a map:
+        Map<String, List<Double>> gradesByStudentMap = new TreeMap<>();
 
-        for (int i = 1; i <= number; i++) {
+        for (int i = 0; i < n; i++) {
             String[] array = scanner.nextLine().split(" ");
             String name = array[0];
             double grade = Double.parseDouble(array[1]);
-
-            if (!students.containsKey(name)) {
-                students.put(name, new ArrayList<>());
-                students.get(name).add(grade);
-            } else {
-                students.get(name).add(grade);
-            }
+            gradesByStudentMap.putIfAbsent(name, new ArrayList<>());
+            gradesByStudentMap.get(name).add(grade);
         }
 
-        students.entrySet().stream().sorted(
-                        (left, rigth) -> left.getKey().compareTo(rigth.getKey())
-                )
-                .forEach(entry -> {
-                    System.out.printf("%s -> ", entry.getKey());
-                    entry.getValue().forEach(grade -> System.out.printf("%.2f ", grade));
+        // 3. Result appending and printing:
+        StringBuilder result = new StringBuilder();
 
-                    double gradesSum = 0;
-                    for (int i = 0; i < entry.getValue().size(); i++) {
-                        double currentGrade = entry.getValue().get(i);
-                        gradesSum += currentGrade;
-                    }
-                    System.out.printf("(avg: %.2f)%n", gradesSum / entry.getValue().size());
-                });
+        gradesByStudentMap.entrySet().forEach((entry) -> {
+            String name = entry.getKey();
+            List<Double> grades = entry.getValue();
 
+            // 3.1. Appending name
+            result.append(name).append(" -> ");
 
-        // Ivan  -> 2.00 3.00 4.00 -> avrg 3.00
-        // Maria -> 3.00 4.00 5.00 -> avrg 4.00
+            // 3.2. Appending grades
+            for (Double grade : grades) {
+                String formattedGrade = String.format("%.2f ", grade);
+                result.append(formattedGrade);
+            }
+
+            // 3.3. Appending avg sum
+            double gradesSum = 0;
+            for (Double grade : grades) {
+                gradesSum += grade;
+            }
+            double gradesAvg = gradesSum / grades.size();
+            result.append(String.format("(avg: %.2f)\n", gradesAvg));
+        });
+
+        // 3.4. Printing
+        System.out.println(result);
     }
-
 }
