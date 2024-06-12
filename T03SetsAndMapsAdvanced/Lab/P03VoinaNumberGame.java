@@ -8,54 +8,48 @@ import java.util.stream.Collectors;
 
 public class P03VoinaNumberGame {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
+        Set<Integer> cards1 = readCards(scanner);
+        Set<Integer> cards2 = readCards(scanner);
 
-        LinkedHashSet<Integer> firstPlayerCards = Arrays.stream(scanner.nextLine().split(" "))
-                .map(e -> Integer.parseInt(e))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        int counter = 1;
 
-        LinkedHashSet<Integer> secondPlayerCards = Arrays.stream(scanner.nextLine().split(" "))
-                .map(e -> Integer.parseInt(e))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        // 2. Removing the top elements from both sets and adding
+        // them to the set with the better card.
+        while (!cards1.isEmpty() && !cards2.isEmpty() && counter <= 50) {
+            int topCards1 = cards1.iterator().next(); // top element of the set
+            int topCards2 = cards2.iterator().next();
+            cards1.remove(topCards1);
+            cards2.remove(topCards2);
 
-        System.out.println();
-
-        for (int i = 1; i <= 50; i++) {
-            if (firstPlayerCards.isEmpty()) {
-                System.out.println("Second player win!");
-                return;
+            if (topCards1 > topCards2) {
+                cards1.add(topCards1);
+                cards1.add(topCards2);
+            } else if (topCards2 > topCards1) {
+                cards2.add(topCards1);
+                cards2.add(topCards2);
             }
 
-            if (secondPlayerCards.isEmpty()) {
-                System.out.println("First player win");
-                return;
-            }
-
-            int firstPlayerCard = firstPlayerCards.iterator().next();
-            int secondPlayerCard = secondPlayerCards.iterator().next();
-
-            firstPlayerCards.remove(firstPlayerCard);
-            secondPlayerCards.remove(secondPlayerCard);
-
-            if (firstPlayerCard > secondPlayerCard) {
-                firstPlayerCards.add(firstPlayerCard);
-                firstPlayerCards.add(secondPlayerCard);
-            } else if (secondPlayerCard > firstPlayerCard) {
-                secondPlayerCards.add(firstPlayerCard);
-                secondPlayerCards.add(secondPlayerCard);
-            }
+            counter++;
         }
 
-        int firstPlayerDeck = firstPlayerCards.size();
-        int secondPlayerDeck = secondPlayerCards.size();
+        // 3. Message printing - 3 cases:
+        int cards1Size = cards1.size();
+        int cards2Size = cards2.size();
 
-        if (firstPlayerDeck > secondPlayerDeck) {
+        if (cards1Size > cards2Size) {
             System.out.println("First player win!");
-        } else if (secondPlayerDeck > firstPlayerDeck) {
+        } else if (cards2Size > cards1Size) {
             System.out.println("Second player win!");
         } else {
             System.out.println("Draw!");
         }
+    }
 
+    private static LinkedHashSet<Integer> readCards(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }
