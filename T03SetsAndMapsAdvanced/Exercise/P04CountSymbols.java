@@ -6,18 +6,20 @@ import java.util.TreeMap;
 
 public class P04CountSymbols {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
+        Map<Character, Integer> occurrencesBySymbols = new TreeMap<>();
+        char[] chars = scanner.nextLine().toCharArray();
 
-        Map<Character, Integer> map = new TreeMap<>();
-
-        String input = scanner.nextLine();
-
-        for (int i = 0; i < input.length(); i++) {
-            char currentChar = input.charAt(i);
-            map.putIfAbsent(currentChar, 0);
-            map.put(currentChar, map.get(currentChar) + 1);
+        // 2. Adding to the map
+        for (char charE : chars) {
+            occurrencesBySymbols.putIfAbsent(charE, 0);
+            int oldOcc = occurrencesBySymbols.get(charE);
+            occurrencesBySymbols.put(charE, oldOcc + 1);
         }
 
-        map.forEach((key, value) -> System.out.printf("%c: %d time/s%n", key, value));
+        // 3. Output printing:
+        occurrencesBySymbols.forEach( (key, value) ->
+                System.out.printf("%c: %d time/s\n", key, value)) ;
     }
 }
