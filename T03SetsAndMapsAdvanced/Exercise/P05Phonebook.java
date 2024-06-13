@@ -6,32 +6,34 @@ import java.util.Scanner;
 
 public class P05Phonebook {
     public static void main(String[] args) {
+        // 1. Input reading and adding to a map
+
         Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
+        Map<String, String> numbersByPeople = new LinkedHashMap<>();
 
-        Map<String, String> map = new LinkedHashMap<>();
-
-        String input = scanner.nextLine();
-        while (!input.equals("search")) {
-
-            String[] information = input.split("-");
-            String name = information[0];
-            String phoneNumber = information[1];
-
-            map.put(name, phoneNumber);
-
-            input = scanner.nextLine();
+        while (!line.equals("search")) {
+            String[] array = line.split("-");
+            String name = array[0];
+            String number = array[1];
+            numbersByPeople.put(name, number);
+            line = scanner.nextLine();
         }
 
-        String secondInput = scanner.nextLine();
-        while(!secondInput.equals("stop")) {
+        // 2. Names reading and message printing
+        line = scanner.nextLine();
+        while (!line.equals("stop")) {
+            String number = numbersByPeople.get(line);
+            messagePrinting(line, number);
+            line = scanner.nextLine();
+        }
+    }
 
-            if (map.containsKey(secondInput)) {
-                System.out.printf("%s -> %s%n", secondInput, map.get(secondInput));
-            } else {
-                System.out.printf("Contact %s does not exist.%n", secondInput);
-            }
-
-            secondInput = scanner.nextLine();
+    private static void messagePrinting(String line, String number) {
+        if (number == null) {
+            System.out.printf("Contact %s does not exist.\n", line);
+        } else {
+            System.out.printf("%s -> %s\n", line, number);
         }
     }
 }
