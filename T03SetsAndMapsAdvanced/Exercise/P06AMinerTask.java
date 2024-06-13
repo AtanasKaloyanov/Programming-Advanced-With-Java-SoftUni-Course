@@ -1,34 +1,23 @@
 package T03SetsAndMapsAdvanced.Exercise;
-
 import java.util.*;
 
 public class P06AMinerTask {
     public static void main(String[] args) {
+        // 1. Input reading and adding the into a map
         Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
 
-        Map<String, Integer> map = new LinkedHashMap<>();
-
-        int counter = 0;
-        String input = scanner.nextLine();
-        String resource = "";
-
-        while (!input.equals("stop")) {
-            counter++;
-
-            if (counter % 2 != 0) {
-               resource = input;
-               map.putIfAbsent(resource, 0);
-
-            } else {
-                int quantity = Integer.parseInt(input);
-                map.put(resource, map.get(resource) + quantity);
-            }
-
-            input= scanner.nextLine();
+        Map<String, Integer> quantityByElement = new LinkedHashMap<>();
+        while (!line.equals("stop")) {
+            int addedQuantity = Integer.parseInt(scanner.nextLine());
+            quantityByElement.putIfAbsent(line, 0);
+            int currentQuantity = quantityByElement.get(line);
+            quantityByElement.put(line, currentQuantity + addedQuantity);
+            line = scanner.nextLine();
         }
 
-        System.out.println();
-
-        map.forEach( (key, value) -> System.out.printf("%s -> %s%n", key, value));
+        // 2. Output printing:
+        quantityByElement.forEach( (key, value) ->
+                System.out.printf("%s -> %d\n", key, value));
     }
 }
