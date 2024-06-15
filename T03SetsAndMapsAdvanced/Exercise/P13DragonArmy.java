@@ -1,12 +1,8 @@
 package T03SetsAndMapsAdvanced.Exercise;
-
-import com.sun.source.doctree.EscapeTree;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
-import java.util.function.Function;
 
 public class P13DragonArmy {
     static class Dragon {
@@ -71,7 +67,7 @@ public class P13DragonArmy {
             dragonByNameMapByType.put(type, dragonsByName);
         }
 
-        // 3. Printing:
+        // 2. Finding avg values and printing:
         dragonByNameMapByType.forEach((type, dragonByName) -> {
             double damageAvg = getDamageAvg(dragonByName);
             double healthAvg = getHealthAvg(dragonByName);
