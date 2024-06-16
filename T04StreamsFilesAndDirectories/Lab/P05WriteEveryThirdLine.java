@@ -7,33 +7,37 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class P05WriteEveryThirdLine {
+    // 1. Paths const initializing
+    private static String inputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt";
+    private static String outputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\05.WriteEveryThirdLineOutput.txt";
+
     public static void main(String[] args) {
+        Scanner scanner = null;
+        PrintWriter pw = null;
 
-        String inPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\input.txt";
-        String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\output.txt";
-
+        // 2. Try-catch-finally algorithm
         try {
-            FileReader in = new FileReader(inPath);
-            FileWriter out = new FileWriter(outPath);
+            scanner = new Scanner(new FileReader(inputPath));
+            pw = new PrintWriter(new FileWriter(outputPath));
 
-            Scanner scanner = new Scanner(in);
-            PrintWriter printOut = new PrintWriter(out);
-
-            String input = scanner.nextLine();
-            int counter = 1;
-            while (scanner.hasNext()) {
-
+            int counter = 0;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                counter++;
                 if (counter % 3 == 0) {
-                    printOut.println(input);
+                    pw.println(line);
                 }
-                    counter++;
-
-               input =  scanner.nextLine();
             }
-            printOut.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (pw != null) {
+                pw.close();
+            }
         }
     }
 }

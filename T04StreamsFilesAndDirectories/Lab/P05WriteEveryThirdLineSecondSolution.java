@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class P05WriteEveryThirdLineSecondSolution {
     public static void main(String[] args) {
+        // 1. Constants for input and output initializing
+        String inPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt";
+        String outPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\05.WriteEveryThirdLineOutput.txt";
 
-        String inPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\input.txt";
-        String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\output.txt";
-
+        // 2. Try-catch algorithm
         try {
             FileReader in = new FileReader(inPath);
             FileWriter out = new FileWriter(outPath);
@@ -20,7 +21,6 @@ public class P05WriteEveryThirdLineSecondSolution {
             int counter = 1;
 
             while (input != null) {
-
                 if (counter % 3 == 0) {
                     printOut.println(input);
                 }
