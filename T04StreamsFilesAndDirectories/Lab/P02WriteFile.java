@@ -9,28 +9,38 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class P02WriteFile {
-    public static void main(String[] args) {
+    // 1. Creating 3 constants - 2 paths and a set
+    private static final String inputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt";
+    private static final String outputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\02.WriteToFileOutput.txt";
+    private static Set<Character> escapingChars = new HashSet<>(Set.of(',', '.', '!', '?'));
 
-        String path = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\input.txt";
-        String secondPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\output.txt";
-
-        Set<Character> symbolsForDeleting = new HashSet<>();
-        Collections.addAll(symbolsForDeleting, '?', '!', ',', '.');
+    public static void main(String[] args) throws IOException {
+        // 2. Printing try-catch-finally algorithm
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
 
         try {
-            FileInputStream in = new FileInputStream(path);
-            FileOutputStream out = new FileOutputStream(secondPath);
+            fis = new FileInputStream(inputPath);
+            fos = new FileOutputStream(outputPath);
+            int currentElement = fis.read();
 
-            int oneByte = in.read();
-            while (oneByte >= 0) {
-                char currentChar = (char) oneByte;
-                if (!symbolsForDeleting.contains(currentChar)) {
-                    out.write(currentChar);
+            while (currentElement != -1) {
+                char elementAsChar = (char) currentElement;
+                if (!escapingChars.contains(elementAsChar)) {
+                    fos.write(elementAsChar);
                 }
-                oneByte = in.read();
+
+                currentElement = fis.read();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } finally {
+            if (fis != null) {
+                fis.close();
+            }
+            if (fos != null) {
+                fos.close();
+            }
         }
     }
 }
