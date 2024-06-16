@@ -4,31 +4,48 @@ import java.io.*;
 import java.util.Scanner;
 
 public class P04ExtractIntegers {
+    // 1. Paths const initializing
+    private static String inputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt";
+    private static String outputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\04.ExtractIntegersOutput.txt";
+
     public static void main(String[] args) {
+        Scanner scanner = null;
+        PrintWriter pw = null;
 
-        String inPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\input.txt";
-        String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\output.txt";
-
+        // 2. Try-catch-finally algorithm
         try {
-            FileReader in = new FileReader(inPath);
-            Scanner scanner = new Scanner(in);
+            scanner = new Scanner(new FileReader(inputPath));
+            pw = new PrintWriter(new FileWriter(outputPath));
 
-            FileWriter out = new FileWriter(outPath);
-            PrintWriter printOut = new PrintWriter(out);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] lineWords = line.split(" ");
 
-            while (scanner.hasNext()) {
-
-                if (scanner.hasNextInt()) {
-                    int currentNumber = scanner.nextInt();
-                    printOut.println(currentNumber);
+                for (String word : lineWords) {
+                    if (isNumber(word)) {
+                        pw.println(word);
+                    }
                 }
-
-                scanner.next();
             }
-            printOut.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (pw != null) {
+                pw.close();
+            }
+        }
+    }
+
+    private static boolean isNumber(String word) {
+        try {
+            int number = Integer.parseInt(word);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
