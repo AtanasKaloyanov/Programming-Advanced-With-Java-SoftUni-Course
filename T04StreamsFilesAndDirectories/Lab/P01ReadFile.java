@@ -10,6 +10,7 @@ public class P01ReadFile {
         // 1. Path variable assignment
         String path = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt";
 
+        // 2. Reading the input as byte by byte and printing every byte
         try {
             FileInputStream fileStream = new FileInputStream(path);
             // int from the ASCII Table
