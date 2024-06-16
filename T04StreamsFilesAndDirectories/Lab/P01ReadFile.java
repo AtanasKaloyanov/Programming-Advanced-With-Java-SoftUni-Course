@@ -6,20 +6,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class P01ReadFile {
-    public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-
-        String path = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\input.txt";
-        FileInputStream fileStream = new FileInputStream(path);
+    public static void main(String[] args) {
+        // 1. Path variable assignment
+        String path = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt";
 
         try {
+            FileInputStream fileStream = new FileInputStream(path);
+            // int from the ASCII Table
             int oneByte = fileStream.read();
-            while (oneByte >= 0) {
-                System.out.printf("%s ", Integer.toBinaryString(oneByte));
+            while (oneByte != -1) {
+                // binary representation
+                String binaryRepresentation = Integer.toBinaryString(oneByte);
+                System.out.print(binaryRepresentation + " ");
                 oneByte = fileStream.read();
             }
-        } catch (IOException a) {
-            a.printStackTrace();
+        } catch (IOException exc) {
+            exc.printStackTrace();
         }
 
     }
