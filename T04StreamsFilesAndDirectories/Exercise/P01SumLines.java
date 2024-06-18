@@ -8,8 +8,10 @@ import java.io.InputStreamReader;
 public class P01SumLines {
     public static void main(String[] args) {
 
-        String inputPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
+        String inputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources – Копие\\input.txt";
 
+        // 1. Algorithm for reading every line with bufferedReader and adding its
+        // Ascii sum to an accumulative variable
         try {
             FileReader fileReader = new FileReader(inputPath);
             BufferedReader bf = new BufferedReader(fileReader);
@@ -24,6 +26,9 @@ public class P01SumLines {
                 System.out.println(currentSum);
                 currentLine = bf.readLine();
             }
+
+            fileReader.close();
+            bf.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
