@@ -9,7 +9,7 @@ import java.util.List;
 public class P01SumLinesSecondSolution {
     public static void main(String[] args) {
 
-        String pathString = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
+        String pathString = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
 
         try {
             Path path = Path.of(pathString);

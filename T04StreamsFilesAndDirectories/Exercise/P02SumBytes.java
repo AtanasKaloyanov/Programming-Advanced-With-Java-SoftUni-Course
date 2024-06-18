@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class P02SumBytes {
     public static void main(String[] args) {
-        String path = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
+        String path = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
       try {
           // 1. Algorithm for reading every line with bufferedReader and adding its
           // Ascii sum to an accumulative variable

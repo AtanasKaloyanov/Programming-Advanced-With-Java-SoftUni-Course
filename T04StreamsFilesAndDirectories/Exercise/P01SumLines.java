@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 public class P01SumLines {
     public static void main(String[] args) {
 
-        String inputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources – Копие\\input.txt";
+        String inputPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
 
         // 1. Algorithm for reading every line with bufferedReader and adding its
         // Ascii sum to an accumulative variable
