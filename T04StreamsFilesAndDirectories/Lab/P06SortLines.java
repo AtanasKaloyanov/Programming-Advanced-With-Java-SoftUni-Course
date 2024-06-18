@@ -11,11 +11,9 @@ import java.util.Scanner;
 
 public class P06SortLines {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        Path inPath = Paths.get("D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\input.txt");
-        Path outPath = Paths.get("D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\output.txt");
-
+        // 1. file reading and writing alg
+        Path inPath = Paths.get("D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\input.txt");
+        Path outPath = Paths.get("D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\06.SortLinesOutput.txt");
         try {
             List<String> list = Files.readAllLines(inPath);
             Collections.sort(list);
