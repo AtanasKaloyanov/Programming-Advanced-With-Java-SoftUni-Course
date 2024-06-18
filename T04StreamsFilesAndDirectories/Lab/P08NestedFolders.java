@@ -7,19 +7,18 @@ import java.util.List;
 import java.util.Objects;
 
 public class P08NestedFolders {
-    public static void main(String[] args) {
+    private static String path = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Lab\\Files\\Files-and-Streams";
 
-        String path = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\9. Streams, Files and Directories\\Files Tor the Tasks\\Files-and-Streams";
+    public static void main(String[] args) {
         File folder = new File(path);
 
+        // bfs algorithm
         ArrayDeque<File> queue = new ArrayDeque<>();
         queue.add(folder);
-
         int folderCounter = 0;
 
         while (!queue.isEmpty()) {
             File currentFile = queue.poll();
-
             if (currentFile.isDirectory()) {
                 System.out.println(currentFile.getName());
                 queue.addAll(List.of(currentFile.listFiles()));
