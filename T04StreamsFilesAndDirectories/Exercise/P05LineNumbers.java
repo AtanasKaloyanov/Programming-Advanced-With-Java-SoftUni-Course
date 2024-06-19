@@ -3,12 +3,12 @@ package T04StreamsFilesAndDirectories.Exercise;
 import java.io.*;
 
 public class P05LineNumbers {
+    private static final String inPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\inputLineNumbers.txt";
+    private static final String outPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\output.txt";
     public static void main(String[] args) {
 
-        String inPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\inputLineNumbers.txt";
-        String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\output.txt";
-
         try {
+            // reading, changing and writing algorithm
             FileReader fileReader = new FileReader(inPath);
             FileWriter fileWriter = new FileWriter(outPath);
 
@@ -18,11 +18,9 @@ public class P05LineNumbers {
             int counter = 1;
             String line = bufferedReader.readLine();
             while (line != null) {
-
                 bufferedWriter.write(counter + ". " + line);
                 bufferedWriter.newLine();
                 counter++;
-
                 line = bufferedReader.readLine();
             }
             bufferedWriter.close();
