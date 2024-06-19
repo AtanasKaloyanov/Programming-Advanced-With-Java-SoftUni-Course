@@ -9,20 +9,23 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class P04CountCharacterTypes {
-    public static void main(String[] args) {
+    private static String pathIn = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
+    private static String outPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\output.txt";
 
-        String pathIn = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
+    public static void main(String[] args) {
         Path path = Path.of(pathIn);
         int vowels = 0;
         int consonants = 0;
         int punctuation = 0;
 
         try {
+            // 1. Reading
             List<String> list = Files.readAllLines(path);
             for (String currentElement : list) {
                 for (int i = 0; i < currentElement.length(); i++) {
                     char currentChar = currentElement.charAt(i);
 
+                    // 2. Checking every char
                     switch (currentChar) {
                         case 'a', 'e', 'i', 'o', 'u':
                             vowels++;
@@ -42,7 +45,7 @@ public class P04CountCharacterTypes {
                 }
             }
 
-            String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\output.txt";
+            // 3. Writing
             FileWriter fileReader = new FileWriter(outPath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileReader);
 
