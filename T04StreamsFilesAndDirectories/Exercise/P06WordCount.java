@@ -6,20 +6,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class P06WordCount {
+    private static String pathToWords = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\words.txt";
+    private static String pathToText = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\text.txt";
+    private static String outPath = "D:\\Programming\\Projects\\Programming Advanced\\src\\T04StreamsFilesAndDirectories\\Exercise\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\results.txt";
+    private static Map<String, Integer> map = new HashMap<>();
+
     public static void main(String[] args) {
-
-        String pathToWords = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\words.txt";
+        // 1. Adding the word to a map
         Path path = Path.of(pathToWords);
-
-        String pathToText = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\text.txt";
         Path secondPath = Path.of(pathToText);
-
-        Map<String, Integer> map = new HashMap<>();
 
         try {
             List<String> list = Files.readAllLines(path);
@@ -31,6 +32,7 @@ public class P06WordCount {
                     map.put(currentWord, 0);
                 }
 
+                // 2. Adding the occurrences
                 List<String> secondList = Files.readAllLines(secondPath);
                 for (String currWord : secondList) {
                     String[] secondArray = currWord.split("[., ]");
@@ -41,30 +43,31 @@ public class P06WordCount {
                         }
                     }
                 }
-
             }
 
-            String outPath = "D:\\Programming\\SoftUni\\Programming Advanced with Java\\10. Exercise - Streams, Files and Directories\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\results.txt";
-
+            // 3. Printing
             FileWriter fileWriter = new FileWriter(outPath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            map.entrySet().stream().sorted( (firstEntry, secondEntry) -> secondEntry.getValue().compareTo(firstEntry.getValue()))
+            map.entrySet().stream()
+                    .sorted(occurencesComparator())
                     .forEach(entry -> {
-                try {
-                    bufferedWriter.write(entry.getKey() + " - " + entry.getValue());
-                    bufferedWriter.newLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+                        try {
+                            bufferedWriter.write(entry.getKey() + " - " + entry.getValue());
+                            bufferedWriter.newLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
 
             bufferedWriter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-
+    private static Comparator<Map.Entry<String, Integer>> occurencesComparator() {
+        return (firstEntry, secondEntry) -> secondEntry.getValue().compareTo(firstEntry.getValue());
     }
 }
