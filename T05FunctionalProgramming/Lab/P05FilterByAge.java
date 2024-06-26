@@ -1,60 +1,77 @@
 package T05FunctionalProgramming.Lab;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.function.BiPredicate;
+import java.util.*;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 public class P05FilterByAge {
+    static class Person {
+        private String name;
+        private int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public int getAge() {
+            return this.age;
+        }
+
+    }
     public static void main(String[] args) {
+        // 1. Input reading and adding it to a map:
         Scanner scanner = new Scanner(System.in);
+        int times = Integer.parseInt(scanner.nextLine());
 
-        int number = Integer.parseInt(scanner.nextLine());
-        Map<String, Integer> namesAndAges = new LinkedHashMap<>();
-
-        for (int i = 1; i <= number; i++) {
+        List<Person> people = new ArrayList<>();
+        for (int i = 1; i <= times; i++) {
             String[] array = scanner.nextLine().split(", ");
             String name = array[0];
             int age = Integer.parseInt(array[1]);
-
-            namesAndAges.put(name, age);
+            Person person = new Person(name, age);
+            people.add(person);
         }
 
-        String condition = scanner.nextLine();
-        int age = Integer.parseInt(scanner.nextLine());
-        String format = scanner.nextLine();
+        // 2. Reading older or younger, age and format:
+        String youngerOrOlder = scanner.nextLine();
+        int givenAge = Integer.parseInt(scanner.nextLine());
+        String printFormat = scanner.nextLine();
 
-        BiPredicate<Integer, Integer> filterPredicate;
+        // 3. Predicate initializing:
 
-        if (condition.equals("younger")) {
-            filterPredicate = (personAge, conditionAge) -> personAge <= conditionAge;
+        Predicate<Person> predicate;
+        if (youngerOrOlder.equals("younger")) {
+            predicate = (person) -> person.getAge() <= givenAge;
         } else {
-            filterPredicate = (personAge, conditionAge) -> personAge >= conditionAge;
+            predicate = (person) -> person.getAge() >= givenAge;
         }
 
-        Consumer<Map.Entry<String, Integer>> printConsumer;
-
-        switch (format) {
+        // 4. Consumer initializing
+        Consumer<Person> printConsumer;
+        switch (printFormat) {
             case "name":
-                printConsumer = entry -> System.out.println(entry.getKey());
+                printConsumer = person -> System.out.println(person.getName());
                 break;
-
+                
             case "age":
-                printConsumer = entry -> System.out.println(entry.getValue());
+                printConsumer = person -> System.out.println(person.getAge());
                 break;
-
+                
             case "name age":
-            printConsumer = entry -> System.out.printf("%s - %d%n", entry.getKey(), entry.getValue());
+                printConsumer = person -> System.out.printf("%s - %d\n", person.getName(), person.getAge());
                 break;
-
             default:
-                throw new IllegalStateException("Unexpected value: " + format);
+                throw new IllegalStateException("Unexpected value: " + printFormat);
         }
 
-        namesAndAges.entrySet().stream()
-                .filter(person -> filterPredicate.test(person.getValue(), age))
+        // 5. Filtering and printing:
+        people.stream()
+                .filter(predicate)
                 .forEach(printConsumer);
     }
 }
