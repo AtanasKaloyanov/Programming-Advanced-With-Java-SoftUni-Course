@@ -5,60 +5,69 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class P10PredicateParty {
-
-    static List<String> list = null;
-
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
+        List<String> people = readList(scanner);
 
-        list = Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+        // 2. Commands implementation:
+        String line = scanner.nextLine();
+        while (!line.equals("Party!")) {
+            String[] array = line.split(" ");
+            String command = array[0];
+            String using = array[1];
+            String circumstance = array[2];
 
-        String input = scanner.nextLine();
-        while (!input.equals("Party!")) {
-            String[] array = input.split(" ");
-            switch (array[0]) {
-                case "Double":
-                    addOneMore(getPredicate(array));
-                    break;
-
-                case "Remove":
-                    removeName(getPredicate(array));
-                    break;
+            Predicate<String> predicate;
+            if (command.equals("Double")) {
+                predicate = conditionImplementation(using, circumstance);
+                List<String> doubledPeople = getPeopleByCondition(people, predicate);
+                people.addAll(doubledPeople);
+            } else if (command.equals("Remove")) {
+                predicate = conditionImplementation(using, circumstance);
+                people.removeIf(predicate);
             }
 
-            input = scanner.nextLine();
+            line = scanner.nextLine();
         }
 
-        Collections.sort(list);
+        // 3. People sorting:
+        Collections.sort(people);
 
-        if (list.isEmpty()) {
+        // 4. Output printing:
+        if (people.isEmpty()) {
             System.out.println("Nobody is going to the party!");
         } else {
-            System.out.println(list.toString().replaceAll("[\\[\\]]", "") + " are going to the party!");
+            String peopleToTheParty = people.toString().replaceAll("[\\[\\]]", "");
+            System.out.printf("%s are going to the party!", peopleToTheParty);
         }
     }
 
-    private static void removeName(Predicate<String> predicate) {
-        list.removeIf(predicate);
+    private static List<String> getPeopleByCondition(List<String> people, Predicate<String> predicate) {
+        return people.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
     }
 
-    public static void addOneMore(Predicate<String> predicate) {
-        List<String> namesToAdd = new ArrayList<>();
-        list.stream().filter(predicate).forEach(element -> namesToAdd.add(element));
-        list.addAll(namesToAdd);
-    }
-
-    public static Predicate<String> getPredicate(String[] array) {
-        Predicate<String> predicate;
-
-        if (array[1].equals("StartsWith")) {
-            predicate = name -> name.startsWith(array[2]);
-        } else if (array[1].equals("EndsWith")) {
-            predicate = name -> name.endsWith(array[2]);
-        } else {
-            predicate = name -> name.length() == Integer.parseInt(array[2]);
+    private static Predicate<String> conditionImplementation(String using, String circumstance) {
+        Predicate<String> predicate = null;
+        switch (using) {
+            case "StartsWith":
+                predicate = word -> word.startsWith(circumstance);
+                break;
+            case "EndsWith":
+                predicate = word -> word.endsWith(circumstance);
+                break;
+            case "Length":
+                int l = Integer.parseInt(circumstance);
+                predicate = word -> word.length() == l;
+                break;
         }
-
         return predicate;
+    }
+
+    private static List<String> readList(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .collect(Collectors.toList());
     }
 }
