@@ -1,5 +1,7 @@
 package T05FunctionalProgramming.Exercise;
 
+import T05FunctionalProgramming.Exercise2.P04;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -9,43 +11,65 @@ import java.util.stream.Collectors;
 
 public class P04AppliedArithmetic {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
+        List<Integer> numbers = readList(scanner);
 
-        List<Integer> inputList = Arrays.stream(scanner.nextLine().split(" "))
-                .map(number -> Integer.parseInt(number))
-                .collect(Collectors.toList());
-
-        Function<List<Integer>, List<Integer>> function;
-        Consumer<List<Integer>> printing = list -> list.forEach(element -> System.out.print(element + " "));
-
-        String input = scanner.nextLine();
-        while (!input.equals("end")) {
-            switch (input) {
+        // 2. Commands implementation
+        String command = scanner.nextLine();
+        while (!command.equals("end")) {
+            Consumer<List<Integer>> consumer = null;
+            switch (command) {
                 case "add":
-                    function = list -> list.stream().map(number -> number + 1).collect(Collectors.toList());
-                    inputList = function.apply(inputList);
+                    consumer = P04AppliedArithmetic::addingOneToEveryElement;
                     break;
-
-                case "multiply":
-                    function = list -> list.stream().map(number -> number * 2).collect(Collectors.toList());
-                    inputList = function.apply(inputList);
-                    break;
-
                 case "subtract":
-                    function = list -> list.stream().map(number -> number - 1).collect(Collectors.toList());
-                    inputList = function.apply(inputList);
+                    consumer = P04AppliedArithmetic::subtractOneFromEveryElement;
+                    break;
+                case "multiply":
+                    consumer = P04AppliedArithmetic::multiplyByTwo;
                     break;
 
                 case "print":
-                    printing.accept(inputList);
-                    System.out.println();
+                    consumer = P04AppliedArithmetic::printing;
                     break;
-
-                default:
-                    throw new IllegalStateException("Unexpected value: " + input);
             }
 
-            input = scanner.nextLine();
+            consumer.accept(numbers);
+            command = scanner.nextLine();
         }
+
+    }
+
+    private static void printing(List<Integer> list) {
+        list.forEach( (element) -> System.out.print(element + " "));
+        System.out.println();
+    }
+
+    private static void multiplyByTwo(List<Integer> list) {
+        for (int i = 0; i < list.size(); i++) {
+            int currentNumber = list.get(i);
+            list.set(i, currentNumber * 2);
+        }
+    }
+
+    private static void subtractOneFromEveryElement(List<Integer> list) {
+        for (int i = 0; i < list.size(); i++) {
+            int currentElement = list.get(i);
+            list.set(i, currentElement - 1);
+        }
+    }
+
+    private static void addingOneToEveryElement(List<Integer> list) {
+        for (int i = 0; i < list.size(); i++) {
+            int currentNumber = list.get(i);
+            list.set(i, currentNumber + 1);
+        }
+    }
+
+    private static List<Integer> readList(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
