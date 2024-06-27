@@ -22,7 +22,7 @@ public class P05ReverseAndExclude {
         Predicate<Integer> isDivisible = number -> number % divider == 0;
         Consumer<Integer> printer = number -> System.out.print(number + " ");
 
-        // 3. Removing and printing via the predicate and the consumer:
+        // 4. Removing and printing via the predicate and the consumer:
         list.removeIf(isDivisible);
         list.forEach(printer);
     }
