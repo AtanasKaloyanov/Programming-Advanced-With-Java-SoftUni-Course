@@ -8,14 +8,12 @@ import java.util.stream.Collectors;
 
 public class P09ListOfPredicates {
     public static void main(String[] args) {
-
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
         int givenNumber = Integer.parseInt(scanner.nextLine());
+        List<Integer> givenList = readList(scanner);
 
-        List<Integer> givenList = Arrays.stream(scanner.nextLine().split(" "))
-                .map(element -> Integer.parseInt(element))
-                .collect(Collectors.toList());
-
+        // 2. BiFunction initialization:
         BiFunction<Integer, List<Integer>, Boolean> function = (number, list) -> {
             for (Integer currentNumber : list) {
                 if (number % currentNumber != 0) {
@@ -25,10 +23,17 @@ public class P09ListOfPredicates {
             return true;
         };
 
-        for (int i = 1; i <= givenNumber ; i++) {
+        // 3. Output printing:
+        for (int i = 1; i <= givenNumber; i++) {
             if (function.apply(i, givenList)) {
                 System.out.print(i + " ");
             }
         }
+    }
+
+    private static List<Integer> readList(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .map(element -> Integer.parseInt(element))
+                .collect(Collectors.toList());
     }
 }
