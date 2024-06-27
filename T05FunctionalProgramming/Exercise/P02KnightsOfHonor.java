@@ -6,11 +6,12 @@ import java.util.function.Consumer;
 
 public class P02KnightsOfHonor {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
-
         String[] array = scanner.nextLine().split(" ");
-        Consumer<String> printCounsumer = name -> System.out.println("Sir " + name);
 
-        Arrays.stream(array).forEach(name -> printCounsumer.accept(name));
+        // 2. Consumer initializing and printing:
+        Consumer<String> printer = word -> System.out.println("Sir " + word);
+        Arrays.stream(array).forEach(printer);
     }
 }
