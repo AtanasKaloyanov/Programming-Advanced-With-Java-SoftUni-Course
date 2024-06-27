@@ -9,12 +9,23 @@ import java.util.stream.Collectors;
 
 public class P03CustomMinFunction {
     public static void main(String[] args) {
+        // 1. Input reading
         Scanner scanner = new Scanner(System.in);
+        Integer[] array = readArray(scanner);
 
-        List<Integer> givenList = Arrays.stream(scanner.nextLine().split(" ")).map(element -> Integer.parseInt(element)).collect(Collectors.toList());
-        Function<List<Integer>, Integer> function =  list -> Collections.min(list);
+        // 2. getMin function initializing:
+        Function<Integer[], Integer> getMin = arr ->
+                Arrays.stream(arr).mapToInt(e -> e).min().getAsInt();
 
-        int min = function.apply(givenList);
+        // 3. Min finding and printing:
+        int min = getMin.apply(array);
         System.out.println(min);
+    }
+
+    private static Integer[] readArray(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine()
+                        .split(" "))
+                .map(Integer::parseInt)
+                .toArray(Integer[]::new);
     }
 }
