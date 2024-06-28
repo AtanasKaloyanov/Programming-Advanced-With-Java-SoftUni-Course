@@ -5,61 +5,63 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class P11ThePartyReservationFilterModule {
+    private static Map<String, Predicate<String>> predicates = new HashMap();
+
     public static void main(String[] args) {
+        // 1, Input reading:
         Scanner scanner = new Scanner(System.in);
+        List<String> guests = readList(scanner);
 
-        List<String> list = Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
-        List<String> secondList = new ArrayList<>();
-
-        String input = scanner.nextLine();
-        while (!input.equals("Print")) {
-            String[] array = input.split(";");
+        // 2. While cycle implementation until Print command:
+        String line = scanner.nextLine();
+        while (!line.equals("Print")) {
+            // 2.1. Array reading:
+            String[] array = line.split(";");
             String command = array[0];
+            String type = array[1];
+            String parameter = array[2];
 
-            switch (command) {
-                case "Add filter":
-                    list.stream().filter(predicate(array)).forEach(element -> secondList.add(element));
-                    list.removeIf(predicate(array));
+            // 2.2. Predicate implementation:
+            Predicate<String> predicate = null;
+            switch (type) {
+                case "Starts with":
+                    predicate = word -> word.startsWith(parameter);
                     break;
-
-                case "Remove filter":
-          secondList.stream().filter(predicate(array)).forEach(element -> list.add(element));
+                case "Ends with":
+                    predicate = word -> word.endsWith(parameter);
                     break;
-
-                    
+                case "Length":
+                    int givenLength = Integer.parseInt(parameter);
+                    predicate = word -> word.length() == givenLength;
+                    break;
+                case "Contains":
+                    predicate = word -> word.contains(parameter);
+                    break;
             }
 
-            input = scanner.nextLine();
+            // 2.3. Adding or removing the predicate
+            String typePlusParameter = type + " " + parameter;
+            if (command.equals("Remove filter")) {
+                predicates.remove(typePlusParameter);
+            } else if (command.equals("Add filter")) {
+                predicates.put(typePlusParameter, predicate);
+            }
+
+            line = scanner.nextLine();
         }
 
-        System.out.println(list.toString().replaceAll("[\\[\\],]", ""));
+        // 3. Looping through every predicate and filtering the guests:
+        predicates.values().forEach( (predicate) -> {
+            guests.removeIf(predicate);
+        });
+
+        // 4. Printing:
+        System.out.println(guests.toString()
+                .replaceAll("[\\[\\],]", ""));
     }
 
-    public static Predicate<String> predicate(String[] array) {
-        Predicate<String> predicate;
-
-        String condition = array[1];
-        switch (condition) {
-            case "Starts with":
-                predicate = name -> name.startsWith(array[2]);
-
-                break;
-
-            case "Ends with":
-                predicate = name -> name.endsWith(array[2]);
-                break;
-
-            case "Length":
-                predicate = name -> name.length() == Integer.parseInt(array[2]);
-                break;
-
-            case "Contains":
-                predicate = name -> name.contains(array[2]);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + condition);
-        }
-
-        return predicate;
+    private static List<String> readList(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .collect(Collectors.toList());
     }
 }
