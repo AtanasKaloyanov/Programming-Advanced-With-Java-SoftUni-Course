@@ -12,7 +12,6 @@ public class CarConstructors {
     public String getModel() {
         return model;
     }
-
     public int getHorsePower() {
         return horsePower;
     }
@@ -27,6 +26,12 @@ public class CarConstructors {
         this(brand);
         this.model = model;
         this.horsePower = horsePower;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("The car is: %s %s - %d HP.",
+                getBrand(), getModel(), getHorsePower());
     }
 
 }
