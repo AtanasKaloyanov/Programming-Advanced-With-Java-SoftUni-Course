@@ -1,48 +1,32 @@
 package T06DifiningClasses.Exercise.P03SpeedRacing;
 
 public class Car {
-    //Define a class Car that keeps track of a car information Model, fuel amount, fuel cost for 1 kilometer, and distance traveled.
     private String model;
     private double fuelAmount;
-    private double fuelFor1Kilometer;
-    private int amountKilometers;
+    private double fuelCostFor1Km;
+    private int distanceTravelled;
 
-
-
-    public Car(String model, int fuelAmount, double fuelFor1Kilometer) {
+    public Car(String model, double fuelAmount, double fuelCostFor1Km) {
         this.model = model;
         this.fuelAmount = fuelAmount;
-        this.fuelFor1Kilometer = fuelFor1Kilometer;
-        this.amountKilometers = 0;
+        this.fuelCostFor1Km = fuelCostFor1Km;
     }
 
-
-    public int getAmountKilometers() {
-        return amountKilometers;
+    public double getFuelAmount() {
+        return this.fuelAmount;
     }
 
-    public void setFuelAmount(int distance) {
-        this.fuelAmount = fuelAmount - fuelFor1Kilometer * distance;
+    public double getFuelCostFor1Km() {
+        return this.fuelCostFor1Km;
     }
 
-    public void setAmountKilometers(int distance) {
-        this.amountKilometers += distance;
-    }
-
-
-    public boolean isTheFuelEnough(int distance) {
-        if (fuelAmount < fuelFor1Kilometer * distance) {
-            return false;
-        }
-        return true;
+    public void travelDistance(double fuel, double distance) {
+        this.fuelAmount -= fuel;
+        this.distanceTravelled += distance;
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(model + " ").append(String.format("%.2f ", fuelAmount)).append(amountKilometers);
-
-        return builder.toString();
-     }
-
+        return String.format("%s %.2f %d", this.model, this.fuelAmount, this.distanceTravelled);
+    }
 }
