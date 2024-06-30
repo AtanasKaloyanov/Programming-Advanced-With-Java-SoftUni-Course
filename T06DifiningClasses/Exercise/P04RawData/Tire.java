@@ -8,8 +8,4 @@ public class Tire {
         this.pressure = pressure;
         this.age = age;
     }
-
-    public double getPressure() {
-        return pressure;
-    }
 }

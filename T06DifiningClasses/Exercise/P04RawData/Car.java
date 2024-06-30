@@ -15,11 +15,7 @@ public class Car {
         this.tires = tires;
     }
 
-    public Engine getEngine() {
-        return engine;
-    }
-
-    public List<Tire> getTires() {
-        return tires;
+    public String getModel() {
+        return this.model;
     }
 }
