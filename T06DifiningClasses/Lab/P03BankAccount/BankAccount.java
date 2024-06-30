@@ -5,34 +5,30 @@ public class BankAccount {
     private double balance;
     private static double interestRate = 0.02;
 
-    private static int acoountCounter = 0;
-
-    public int getId() {
-        return id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static int getAcoountCounter() {
-        return acoountCounter;
+    public double getBalance() {
+        return this.balance;
     }
 
-    public double getInterestRate(int years) {
-        return years * interestRate * this.balance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    public static double getInterestRate() {
-        return interestRate;
+    public static void setInterestRate(double interest) {
+        BankAccount.interestRate = interest;
     }
 
-    public static void setInterestRate(double interestRate) {
-        BankAccount.interestRate = interestRate;
+    public double getInterest(int years) {
+        double addedSumForYear = this.balance * interestRate;
+        return addedSumForYear * years;
     }
 
-    public BankAccount() {
-        acoountCounter++;
-        this.id = acoountCounter;
-    }
-
-    public void deposit (double money) {
-        this.balance += money;
+    public void deposit(double amount) {
+        double oldSum = this.getBalance();
+        double newSum = oldSum + amount;
+        this.setBalance(newSum);
     }
 }
