@@ -1,22 +1,31 @@
 package T06DifiningClasses.Exercise.P01OpinionPoll;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
-        int numberPeople = Integer.parseInt(scanner.nextLine());
-        Map<String, Integer> map = new TreeMap<>();
+        int n = Integer.parseInt(scanner.nextLine());
 
-        for (int i = 1; i <= numberPeople; i++) {
-            String[] array = scanner.nextLine().split("\\s+");
-            String currentName = array[0];
-            int currentAge = Integer.parseInt(array[1]);
-
-            Person person = new Person(currentName, currentAge);
-            map.put(person.getName(), person.getAge());
+        // 2. Adding the people into a List:
+        List<Person> people = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            String[] info = scanner.nextLine().split(" ");
+            int years = Integer.parseInt(info[1]);
+            if (years > 30) {
+                String name = info[0];
+                Person person = new Person(name, years);
+                people.add(person);
+            }
         }
 
-        map.entrySet().stream().filter(entry -> entry.getValue() > 30).forEach(entry -> System.out.printf("%s - %d%n", entry.getKey(), entry.getValue()));
+        // 3. Sorting and printing:
+        Collections.sort(people);
+        people.forEach(System.out::println);
     }
 }

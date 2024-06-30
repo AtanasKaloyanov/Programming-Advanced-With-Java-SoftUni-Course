@@ -1,6 +1,6 @@
 package T06DifiningClasses.Exercise.P01OpinionPoll;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name;
     private int age;
 
@@ -9,11 +9,13 @@ public class Person {
         this.age = age;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public int compareTo(Person second) {
+        return this.name.compareTo(second.name);
     }
 
-    public int getAge() {
-        return age;
+    @Override
+    public String toString() {
+        return this.name + " - " + this.age;
     }
 }
