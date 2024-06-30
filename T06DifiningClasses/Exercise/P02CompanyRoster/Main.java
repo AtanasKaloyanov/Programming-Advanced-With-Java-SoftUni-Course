@@ -1,70 +1,90 @@
 package T06DifiningClasses.Exercise.P02CompanyRoster;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.nextLine());
 
-        int number = Integer.parseInt(scanner.nextLine());
-        Map<String, List<Employee>> map = new LinkedHashMap<>();
+        // 2. For cycle algorithm. Reading fields and creating and Employee, then adding it
+        // to a Map:
 
+        Map<String, TreeSet<Employee>> employeesByDepartmentMap = new HashMap<>();
 
-        for (int i = 1; i <= number; i++) {
-            String[] array = scanner.nextLine().split("\\s+");
-
+        for (int i = 0; i < n; i++) {
+            // 2.1. Reading the mandatory fields:
+            String[] array = scanner.nextLine().split(" ");
             String name = array[0];
             double salary = Double.parseDouble(array[1]);
             String position = array[2];
             String department = array[3];
+            Employee employee = new Employee(name, salary, position, department);
 
-            Employee employee = null;
-
-            if (array.length == 4) {
-                employee = new Employee(name, salary, position, department);
+            // 2.2. Setting the email and the age - 3 case:
+            String email = "n/a";
+            int age = -1;
+            if (array.length == 6) {
+                email = array[4];
+                age = Integer.parseInt(array[5]);
             } else if (array.length == 5) {
-                if (array[4].contains("@")) {
-                    String email = array[4];
-                    employee = new Employee(name, salary, position, department, email);
+                String emailOrAge = array[4];
+                if (isNumber(emailOrAge)) {
+                    age = Integer.parseInt(emailOrAge);
                 } else {
-                    int age = Integer.parseInt(array[4]);
-                    employee = new Employee(name, salary, position, department, age);
+                    email = emailOrAge;
                 }
-            } else if (array.length == 6) {
-                String email = array[4];
-                int age = Integer.parseInt(array[5]);
-                employee = new Employee(name, salary, position, department, email, age);
-
             }
 
-            map.putIfAbsent(department, new ArrayList<>());
-            map.get(department).add(employee);
+            employee.setEmail(email);
+            employee.setAge(age);
+
+            // 2.3. Adding the employee into the map:
+            employeesByDepartmentMap.putIfAbsent(department, new TreeSet<>());
+            TreeSet<Employee> employees = employeesByDepartmentMap.get(department);
+            employees.add(employee);
+            employeesByDepartmentMap.put(department, employees);
         }
 
-        String departMentWithMaxAvarageSalary = map.entrySet().stream()
-                .max(Comparator.comparingDouble(entry -> getTheHighestSalary(entry.getValue())))
-                .get()
-                .getKey();
-
-        List<Employee> list = map.get(departMentWithMaxAvarageSalary);
-        list.sort(Comparator.comparingDouble(employee -> employee.getSalary()));
-        Collections.reverse(list);
-
-        System.out.printf("Highest Average Salary: %s%n", departMentWithMaxAvarageSalary);
-        for (Employee employee: list) {
-            System.out.println(employee.toString());
-        }
-
+        // 3. Printing:
+        employeesByDepartmentMap.entrySet().stream()
+                .sorted(departmentsAvgSalaryComparator())
+                .limit(1)
+                .forEach(bestDepartmentPrinter());
     }
 
-    private static double getTheHighestSalary(List<Employee> list) {
-        double salarySum = 0;
-        for (int i = 0; i < list.size(); i++) {
-            for (Employee employee : list) {
-                salarySum += employee.getSalary();
-            }
-        }
+    private static Consumer<Map.Entry<String, TreeSet<Employee>>> bestDepartmentPrinter() {
+        return bestEntry -> {
+            String department = bestEntry.getKey();
+            TreeSet<Employee> employees = bestEntry.getValue();
+            System.out.printf("Highest Average Salary: %s\n", department);
+            employees.forEach((System.out::println));
+        };
+    }
 
-        return salarySum / list.size();
+    private static Comparator<Map.Entry<String, TreeSet<Employee>>> departmentsAvgSalaryComparator() {
+        return (entry1, entry2) -> {
+            double department1SalaryAvg = getAvgSalary(entry1);
+            double department1SalaryAvg2 = getAvgSalary(entry2);
+            return Double.compare(department1SalaryAvg2, department1SalaryAvg);
+        };
+    }
+
+    private static double getAvgSalary(Map.Entry<String, TreeSet<Employee>> entry1) {
+        return entry1.getValue().stream()
+                .mapToDouble(Employee::getSalary)
+                .average()
+                .getAsDouble();
+    }
+
+    private static boolean isNumber(String emailOrAge) {
+        try {
+            int number = Integer.parseInt(emailOrAge);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
