@@ -1,34 +1,36 @@
 package T06DifiningClasses.Exercise.P06PokemonTrainer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Trainer {
     private String name;
     private int badges;
-    private List<Pokemon> pokemonList;
+    private Set<Pokemon> pokemons;
 
     public Trainer(String name) {
         this.name = name;
-        this.badges = 0;
-        this.pokemonList = new ArrayList<>();
+        this.pokemons = new HashSet<>();
     }
 
-    public List<Pokemon> getPokemonList() {
-        return pokemonList;
+    public String getName() {
+        return this.name;
     }
 
     public int getBadges() {
         return badges;
     }
 
-    public void setBadges() {
-        this.badges++;
+    public void setBadges(int badges) {
+        this.badges = badges;
     }
 
+    public Set<Pokemon> getPokemons() {
+        return this.pokemons;
+    }
 
     @Override
     public String toString() {
-        return String.format("%s %d %d", name, badges, pokemonList.size());
+        return String.format("%s %d %d", this.name, this.badges, this.pokemons.size());
     }
 }
