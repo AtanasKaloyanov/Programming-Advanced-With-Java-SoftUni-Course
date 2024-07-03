@@ -1,16 +1,16 @@
 package T06DifiningClasses.Exercise.P07Google;
 
 public class Car {
-    private String carModel;
-    private double carSpeed;
+    private String name;
+    private int years;
 
-    public Car(String carModel, double carSpeed) {
-        this.carModel = carModel;
-        this.carSpeed = carSpeed;
+    public Car(String name, int years) {
+        this.name = name;
+        this.years = years;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %.0f", carModel, carSpeed);
+        return this.name + " " + this.years;
     }
 }

@@ -1,88 +1,70 @@
 package T06DifiningClasses.Exercise.P07Google;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Person {
-
+    private String name;
     private Company company;
-    private List<Pokemon> pokemonList;
-    private List<Parents> parentsList;
-    private List<Children> childrenList;
     private Car car;
+    private Set<Parent> parents = new LinkedHashSet<>();
+    private Set<Child> children = new LinkedHashSet<>();
+    private Set<Pokemon> pokemons = new LinkedHashSet<>();
 
-    public Person() {
-        this.pokemonList = new ArrayList<>();
-        this.parentsList = new ArrayList<>();
-        this.childrenList = new ArrayList<>();
-    }
-
-    public List<Children> getChildrenList() {
-        return childrenList;
-    }
-
-    public List<Parents> getParentsList() {
-        return parentsList;
-    }
-
-    public List<Pokemon> getPokemonList() {
-        return pokemonList;
+    public Person(String name) {
+        this.name = name;
     }
 
     public void setCompany(Company company) {
         this.company = company;
     }
 
-
     public void setCar(Car car) {
         this.car = car;
     }
 
+    public Set<Parent> getParents() {
+        return parents;
+    }
+
+    public Set<Child> getChildren() {
+        return children;
+    }
+
+    public Set<Pokemon> getPokemons() {
+        return pokemons;
+    }
+
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("Company:").append("\n");
-        if (company != null) {
-            builder.append(company.toString()).append("\n");
+        StringBuilder sb = new StringBuilder();
+        // 1. person name
+        sb.append(this.name).append("\n");
+        // 2. company
+        sb.append("Company:").append("\n");
+        if (this.company != null) {
+            sb.append(this.company).append("\n");
         }
-
-        builder.append("Car:").append("\n");
-
-        if (car != null) {
-            builder.append(car.toString()).append("\n");
+        // 3. car
+        sb.append("Car:").append("\n");
+        if (this.car != null) {
+            sb.append(this.car).append("\n");
         }
-
-        builder.append("Pokemon:").append("\n");
-
-        for (Pokemon pokemon : pokemonList) {
-            builder.append(pokemon.toString()).append("\n");
+        // 4. pokemon
+        sb.append("Pokemon:").append("\n");
+        for (Pokemon pokemon : this.pokemons) {
+            sb.append(pokemon).append("\n");
         }
-
-        builder.append("Parents:").append("\n");
-
-        for (Parents parents : parentsList) {
-            builder.append(parents.toString()).append("\n");
+        // 5. parents
+        sb.append("Parents:").append("\n");
+        for (Parent parent : this.parents) {
+            sb.append(parent).append("\n");
         }
-
-        builder.append("Children:").append("\n");
-
-        for (Children children : childrenList) {
-            builder.append(children.toString()).append("\n");
+        // 6. children:
+        sb.append("Children:").append("\n");
+        for (Child child : this.children) {
+            sb.append(child).append("\n");
         }
-
-        return builder.toString();
-
-        //Company:
-        //JeleInc Jelior 777.77
-        //Car:
-        //AudiA4 180
-        //Pokemon:
-        //Onyx Rock
-        //Charizard Fire
-        //Parents:
-        //SaraJohnson 13/03/1933
-        //Children:
-        //SamJohnson 01/01/2001
+        return sb.toString();
     }
 }

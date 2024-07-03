@@ -1,77 +1,61 @@
 package T06DifiningClasses.Exercise.P07Google;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
-        Map<String, Person> map = new LinkedHashMap<>();
+        String line = scanner.nextLine();
 
-//•	"{Name} company {companyName} {department} {salary}"
-//•	"{Name} pokemon {pokemonName} {pokemonType}"
-//•	"{Name} parents {parentName} {parentBirthday}"
-//•	"{Name} children {childName} {childBirthday}"
-//•	"{Name} car {carModel} {carSpeed}"
+        Map<String, Person> peopleByName = new HashMap<>();
+        while (!line.equals("End")) {
+            String[] array = line.split(" ");
+            // 2. Creating a person and adding it his / hers fields:
+            String personName = array[0];
+            peopleByName.putIfAbsent(personName, new Person(personName));
+            Person person = peopleByName.get(personName);
 
-        String input = scanner.nextLine();
-        while (!input.equals("End")) {
-            String[] array = input.split("\\s+");
-            String name = array[0];
+            String fieldNameOrModel = array[2];
+            String fieldName = array[1];
 
-            map.putIfAbsent(name, new Person());
-
-            String command = array[1];
-            if (command.equals("company")) {
-
-                String companyName = array[2];
-                String department = array[3];
-                double salary = Double.parseDouble(array[4]);
-
-                Company company = new Company(companyName, department, salary);
-                map.get(name).setCompany(company);
-
-            } else if (command.equals("pokemon")) {
-
-                String pokemonName = array[2];
-                String pokemonType = array[3];
-
-                Pokemon pokemon = new Pokemon(pokemonName, pokemonType);
-                map.get(name).getPokemonList().add(pokemon);
-
-            } else if (command.equals("parents")) {
-
-                String parentName = array[2];
-                String parentBirthday = array[3];
-
-                Parents parents = new Parents(parentName, parentBirthday);
-                map.get(name).getParentsList().add(parents);
-
-            } else if (command.equals("children")) {
-
-                String childName = array[2];
-                String childBirthday = array[3];
-
-                Children children = new Children(childName, childBirthday);
-                map.get(name).getChildrenList().add(children);
-
-            } else if (command.equals("car")) {
-
-                String carModel = array[2];
-                double carSpeed = Double.parseDouble(array[3]);
-
-                Car car = new Car(carModel, carSpeed);
-                map.get(name).setCar(car);
+            switch (fieldName) {
+                case "company":
+                    String department = array[3];
+                    double salary = Double.parseDouble(array[4]);
+                    Company company = new Company(fieldNameOrModel, department, salary);
+                    person.setCompany(company);
+                    break;
+                case "pokemon":
+                    String type = array[3];
+                    Pokemon pokemon = new Pokemon(fieldNameOrModel, type);
+                    person.getPokemons().add(pokemon);
+                    break;
+                case "parents":
+                    String birthday = array[3];
+                    Parent parent = new Parent(fieldNameOrModel, birthday);
+                    person.getParents().add(parent);
+                    break;
+                case "children":
+                    String birthday2 = array[3];
+                    Child child = new Child(fieldNameOrModel, birthday2);
+                    person.getChildren().add(child);
+                    break;
+                case "car":
+                    int speed = Integer.parseInt(array[3]);
+                    Car car = new Car(fieldNameOrModel, speed);
+                    person.setCar(car);
+                    break;
             }
 
-                input = scanner.nextLine();
+            line = scanner.nextLine();
         }
 
-        String printName = scanner.nextLine();
-
-        System.out.println(printName);
-        Person searchedPerson = map.get(printName);
-        System.out.println(searchedPerson.toString());
+        // 3. Searched name:
+        String name = scanner.nextLine();
+        Person person = peopleByName.get(name);
+        System.out.print(person);
     }
 }
