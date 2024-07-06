@@ -4,31 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box<T> {
-    private List<T> list;
-
-    public Box() {
-        this.list = new ArrayList<>();
+    private List<T> elements = new ArrayList<>();
+    public void addElement(T element) {
+        elements.add(element);
     }
 
-    public void add(T element) {
-        this.list.add(element);
-    }
-
-    public void swap(int firstIndex, int secondIndex) {
-        T firstElement = this.list.get(firstIndex);
-        T secondElement = this.list.get(secondIndex);
-
-        this.list.set(firstIndex, secondElement);
-        this.list.set(secondIndex, firstElement);
+    public void swap(int index1, int index2) {
+        T element1 = this.elements.get(index1);
+        T element2 = this.elements.get(index2);
+        this.elements.set(index1, element2);
+        this.elements.set(index2, element1);
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (T element : list) {
-            builder.append(element.getClass().getName()).append(": ").append(element).append("\n");
+        StringBuilder sb = new StringBuilder();
+        for (T element : elements) {
+            String classInfo = element.getClass().getName();
+            sb.append(classInfo)
+                    .append(": ")
+                    .append(element)
+                    .append("\n");
         }
-
-        return builder.toString();
+        return sb.toString();
     }
 }
