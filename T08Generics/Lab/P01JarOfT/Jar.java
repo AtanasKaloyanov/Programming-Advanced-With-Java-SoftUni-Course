@@ -9,12 +9,16 @@ public class Jar<T> {
         this.stack = new ArrayDeque<>();
     }
 
+    public ArrayDeque<T> getStack() {
+        return this.stack;
+    }
+
     public void add(T element) {
         this.stack.push(element);
     }
 
     public T remove() {
-       return this.stack.pop();
+        return this.stack.pop();
     }
 
 }
