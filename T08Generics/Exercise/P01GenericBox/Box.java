@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box<T> {
-    private List<T> list;
-
-    public Box() {
-        list = new ArrayList<>();
-    }
-
+    private List<T> elements = new ArrayList<>();
     public void addElement(T element) {
-        list.add(element);
+        elements.add(element);
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (T element : list) {
-            builder.append(element.getClass().getName()).append(": ").append(element).append("\n");
+        StringBuilder sb = new StringBuilder();
+        for (T element : elements) {
+            String classInfo = element.getClass().getName();
+            sb.append(classInfo)
+                    .append(": ")
+                    .append(element)
+                    .append("\n");
         }
-        return builder.toString();
+        return sb.toString();
     }
 }
