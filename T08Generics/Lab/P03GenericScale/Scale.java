@@ -9,12 +9,12 @@ public class Scale <T extends Comparable> {
         this.right = right;
     }
 
-
     public T getHeavier() {
-        if (left.compareTo(right) == 0) {
-            return null;
-        }  if (left.compareTo(right) > 0) {
+        int comparator = this.left.compareTo(this.right);
+        if (comparator > 0) {
             return left;
+        } else if (comparator == 0) {
+            return null;
         }
         return right;
     }
