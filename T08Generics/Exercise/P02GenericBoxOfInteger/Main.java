@@ -1,21 +1,21 @@
 package T08Generics.Exercise.P02GenericBoxOfInteger;
 
-import T08Generics.Exercise.P01GenericBox.Box;
-
 import java.util.Scanner;
 
     public class Main {
         public static void main(String[] args) {
+            // 1. Input reading:
             Scanner scanner = new Scanner(System.in);
-            int number = Integer.parseInt(scanner.nextLine());
+            int n = Integer.parseInt(scanner.nextLine());
 
-            Box<Integer> box = new Box();
-
-            for (int i = 1; i <= number; i++) {
-                int currentNumber = Integer.parseInt(scanner.nextLine());
-                box.addElement(currentNumber);
+            // 2. Adding every element to the object's List via the method addElement()
+            Box<Integer> box = new Box<>();
+            for (int i = 0; i < n; i++) {
+                Integer element = Integer.parseInt(scanner.nextLine());
+                box.addElement(element);
             }
 
+            // 3. Object printing via the overridden method toString()
             System.out.println(box);
         }
     }
