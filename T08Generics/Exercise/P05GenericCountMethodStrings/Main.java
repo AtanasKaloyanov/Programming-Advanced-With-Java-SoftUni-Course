@@ -4,16 +4,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // 1. Input reading:
         Scanner scanner = new Scanner(System.in);
-        int number = Integer.parseInt(scanner.nextLine());
+        int n = Integer.parseInt(scanner.nextLine());
 
+        // 2. Box initialization and elements reading and adding to the box:
         Box<String> box = new Box<>();
-        for (int i = 1; i <= number; i++) {
-            String currentElement = scanner.nextLine();
-            box.add(currentElement);
+        for (int i = 0; i < n; i++) {
+            String element = scanner.nextLine();
+            box.addElement(element);
         }
 
-        String elementForCompare = scanner.nextLine();
-        System.out.println(box.countingBetterElements(elementForCompare));
+        // 3. CompareElement reading and becoming the count of the better element
+        // via the method greaterElementsCount()
+        String compareElement = scanner.nextLine();
+        int betterElementsCount = box.greaterElementsCount(compareElement);
+
+        // 4. Output printing:
+        System.out.println(betterElementsCount);
     }
 }
