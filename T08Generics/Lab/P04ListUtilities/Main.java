@@ -6,14 +6,23 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        ListUtils listUtils = new ListUtils();
-        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        // 1. Creating an ArrayList and getting the least element and the greatest
+        // via the static methods getMin() and getMax()
+        List<Integer> numbers = new ArrayList<>(List.of(10, 100, 7, 20));
+        // 1.1. getMin()
+        Integer leastNumber = ListUtils.getMin(numbers);
+        System.out.println(leastNumber);
+        // 1.2. getMax()
+        Integer greatestNumber = ListUtils.getMax(numbers);
+        System.out.println(greatestNumber);
 
-        System.out.println(ListUtils.getMax(list));
-        System.out.println(ListUtils.getMin(list));
-
-        List<String> secondList = new ArrayList<>(Arrays.asList("first", "second", "third"));
-        System.out.println(ListUtils.getMax(secondList));
-        System.out.println(ListUtils.getMin(secondList));
+        // 2. The same algorithm but with String
+        List<String> words = new ArrayList<>(Arrays.asList("B", "A", "D", "Y", "C"));
+        // 2.1 getMin()
+        String firstWord = ListUtils.getMin(words);
+        System.out.println(firstWord);
+        // 2.2. getMax()
+        String lastWord = ListUtils.getMax(words);
+        System.out.println(lastWord);
     }
 }
