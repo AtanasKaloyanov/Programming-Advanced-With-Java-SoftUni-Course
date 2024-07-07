@@ -3,14 +3,20 @@ package T08Generics.Exercise.P08CustomListSorter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class CustomList<T extends Comparable> {
-
+public class CustomList<T extends Comparable<T>> {
     private List<T> list;
 
     public CustomList() {
         this.list = new ArrayList<>();
+    }
+
+    public class Sorter {
+
+    }
+
+    public List<T> getList() {
+        return list;
     }
 
     public void add(T element) {
@@ -22,16 +28,12 @@ public class CustomList<T extends Comparable> {
     }
 
     public boolean contains(T element) {
-        if (this.list.contains(element)) {
-            return true;
-        }
-        return false;
+        return this.list.contains(element);
     }
 
     public void swap(int firsIndex, int secondIndex) {
         T firstElement = this.list.get(firsIndex);
         T secondElement = this.list.get(secondIndex);
-
         this.list.set(firsIndex, secondElement);
         this.list.set(secondIndex, firstElement);
     }
@@ -47,15 +49,11 @@ public class CustomList<T extends Comparable> {
     }
 
     public T getMax() {
-        return (T) Collections.max(list);
+        return Collections.max(this.list);
     }
 
     public T getMin() {
-        return (T) Collections.min(list);
-    }
-
-    public void sort() {
-        this.list = this.list.stream().sorted((firstElement, secondElement) -> firstElement.compareTo(secondElement)).collect(Collectors.toList());
+        return Collections.min(this.list);
     }
 
     @Override
