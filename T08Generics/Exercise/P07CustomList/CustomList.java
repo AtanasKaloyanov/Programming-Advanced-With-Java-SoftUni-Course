@@ -1,9 +1,10 @@
 package T08Generics.Exercise.P07CustomList;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class CustomList<T extends Comparable> {
+public class CustomList<T extends Comparable<T>> {
     private List<T> list;
 
     public CustomList() {
@@ -15,22 +16,16 @@ public class CustomList<T extends Comparable> {
     }
 
     public T remove(int index) {
-        T elementForRemoving = this.list.get(index);
-        this.list.remove(elementForRemoving);
-        return elementForRemoving;
+        return this.list.remove(index);
     }
 
     public boolean contains(T element) {
-        if (this.list.contains(element)) {
-            return true;
-        }
-        return false;
+        return this.list.contains(element);
     }
 
     public void swap(int firsIndex, int secondIndex) {
         T firstElement = this.list.get(firsIndex);
         T secondElement = this.list.get(secondIndex);
-
         this.list.set(firsIndex, secondElement);
         this.list.set(secondIndex, firstElement);
     }
@@ -46,23 +41,11 @@ public class CustomList<T extends Comparable> {
     }
 
     public T getMax() {
-        T bestElement = this.list.get(0);
-        for (T currentElement : this.list) {
-            if (currentElement.compareTo(bestElement) > 0) {
-                bestElement = currentElement;
-            }
-        }
-        return bestElement;
+        return Collections.max(this.list);
     }
 
     public T getMin() {
-        T worstElement = this.list.get(0);
-        for (T currentElement : this.list) {
-            if (currentElement.compareTo(worstElement) < 0) {
-                worstElement = currentElement;
-            }
-        }
-        return worstElement;
+        return Collections.min(this.list);
     }
 
     @Override
