@@ -1,18 +1,19 @@
 package T09IteratorsAndComparators.Lab.P01Book;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Book firstBook = new Book("1984", 1948, "George Orwell");
-        Book secondBook = new Book("I am number 4", 2009, "James Fray", "Jobie Hughes");
+        // 1. Creating 3 objects. The size of the collection
+        // authors (the final parameter) is different for the
+        // different objects:
+        Book book1 = new Book("A", 1);
+        Book book2 = new Book("B", 2, "BA");
+        Book book3 = new Book("C", 3, "CA", "CB");
 
-        List<Book> books = new ArrayList<>();
-        books.add(firstBook);
-        books.add(secondBook);
-
-        books.stream().forEach(book -> System.out.printf("Title: %s, Year: %d, Authour/s: %s%n", book.getTitle(), book.getYear(), book.getAuthors().toString().replaceAll("[\\[\\]]", "")));
+        // 2. Adding the books into an list and printing every book:
+        List<Book> books = new ArrayList<>(List.of(book1, book2, book3));
+        books.forEach(System.out::println);
     }
 }

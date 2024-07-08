@@ -7,7 +7,7 @@ public class Book {
     private int year;
     private List<String> authors;
 
-    public Book(String title, int year, String...authors) {
+    public Book(String title, int year, String... authors) {
         this.title = title;
         this.year = year;
         this.authors = List.of(authors);
@@ -21,11 +21,10 @@ public class Book {
         this.title = title;
     }
 
-
-
     public int getYear() {
         return year;
     }
+
     public void setYear(int year) {
         this.year = year;
     }
@@ -38,4 +37,9 @@ public class Book {
         this.authors = authors;
     }
 
+    @Override
+    public String toString() {
+        return getTitle() + " " + getYear() + " " +
+                getAuthors().toString().replaceAll("[\\[\\]]", "");
+    }
 }
