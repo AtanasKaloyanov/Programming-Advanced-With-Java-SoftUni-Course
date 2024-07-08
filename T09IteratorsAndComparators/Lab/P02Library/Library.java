@@ -9,28 +9,28 @@ public class Library implements Iterable<Book> {
         this.books = books;
     }
 
-    @Override
-    public Iterator<Book> iterator() {
-        return new LibIterator();
+    public Book[] getBooks() {
+        return this.books;
     }
 
-    private class LibIterator implements Iterator<Book> {
-        int index;
-
-        public LibIterator() {
-            this.index = 0;
-        }
+    public class LibIterator implements Iterator<Book> {
+        private int counter;
 
         @Override
         public boolean hasNext() {
-            return this.index < books.length;
+            return this.counter < getBooks().length;
         }
 
         @Override
         public Book next() {
-            Book currentBook = books[index];
-            this.index++;
+            Book currentBook = getBooks()[this.counter];
+            this.counter += 2;
             return currentBook;
         }
+    }
+
+    @Override
+    public Iterator<Book> iterator() {
+        return new  LibIterator();
     }
 }

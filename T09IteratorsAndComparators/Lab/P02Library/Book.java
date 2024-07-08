@@ -1,18 +1,16 @@
 package T09IteratorsAndComparators.Lab.P02Library;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Book {
     private String title;
     private int year;
-    private List<String> author;
+    private List<String> authors;
 
-    public Book(String title, int year, String ... author) {
-        this.title = title;
-        this.year = year;
-        this.author = new ArrayList<>(Arrays.asList(author));
+    public Book(String title, int year, String ... authors) {
+        setTitle(title);
+        setYear(year);
+        setAuthors(List.of(authors));
     }
 
     public String getTitle() {
@@ -31,11 +29,16 @@ public class Book {
         this.year = year;
     }
 
-    public List<String> getAuthor() {
-        return author;
+    public List<String> getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(List<String> author) {
-        this.author = author;
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
+
+    @Override
+    public String toString() {
+        return getTitle() + " " + getYear() + " " + getAuthors();
     }
 }
