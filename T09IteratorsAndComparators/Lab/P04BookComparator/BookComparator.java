@@ -4,11 +4,7 @@ import java.util.Comparator;
 
 public class BookComparator implements Comparator<Book> {
     @Override
-    public int compare(Book firstBook, Book secondBook) {
-        int result = firstBook.getTitle().compareTo(secondBook.getTitle());
-        if (result == 0) {
-            result = Integer.compare(firstBook.getYear(), secondBook.getYear());
-        }
-        return result;
+    public int compare(Book book1, Book book2) {
+        return book1.getTitle().compareTo(book2.getTitle());
     }
 }
