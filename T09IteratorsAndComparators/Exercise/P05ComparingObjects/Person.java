@@ -24,14 +24,14 @@ public class Person implements Comparable<Person> {
     }
 
     @Override
-    public int compareTo(Person otherPerson) {
-        int result = this.name.compareTo(otherPerson.getName());
-        if (result == 0) {
-            result = Integer.compare(this.age, otherPerson.getAge());
-            if (result == 0) {
-                result = this.town.compareTo(otherPerson.getTown());
-            }
+    public int compareTo(Person second) {
+        int compareNumber = this.getName().compareTo(second.getName());
+        if (compareNumber == 0) {
+            compareNumber = Integer.compare(this.getAge(), second.getAge());
         }
-        return result;
+        if (compareNumber == 0) {
+            compareNumber = this.getTown().compareTo(second.getTown());
+        }
+        return compareNumber;
     }
 }
