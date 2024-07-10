@@ -21,7 +21,7 @@ public class Main {
             line = scanner.nextLine();
         }
 
-        // 2. Index computation, person by this index getting and equalPeople counting:
+        // 2. Index computation, person by this index getting and equal people counting:
         int index = Integer.parseInt(scanner.nextLine()) - 1;
         Person person = people.get(index);
 
