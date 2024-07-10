@@ -6,59 +6,59 @@ import java.util.List;
 public class ListyIterator implements Iterable<String>{
     private List<String> list;
     private int index;
+    public ListyIterator(String... elements) {
+        this.list = List.of(elements);
+    }
 
-    public ListyIterator(List<String> givenList) {
-        this.list = givenList;
-        this.index = 0;
+    public List<String> getList() {
+        return list;
     }
 
     public boolean move() {
         if (hasNext()) {
-            index++;
+            this.index++;
             return true;
         }
         return false;
     }
 
     public boolean hasNext() {
-        return index < list.size() - 1;
+        return this.index < this.list.size() - 1;
     }
 
     public void print() {
-        if (list.isEmpty()) {
+        if (this.list.isEmpty()) {
             System.out.println("Invalid Operation!");
-        } else {
-            System.out.println(this.list.get(index));
+            return;
         }
+
+        String currentElement = this.list.get(this.index);
+        System.out.println(currentElement);
     }
 
-    public void pritAll() {
-        list.stream().forEach(element -> System.out.print(element + " "));
+    public void printAll() {
+        this.forEach( (element) -> System.out.print(element + " "));
         System.out.println();
     }
 
-    @Override
-    public Iterator<String> iterator() {
-        return new Assistant();
-    }
-
-    private class Assistant implements Iterator<String> {
-        private int index;
-
-        public Assistant() {
-            this.index = 0;
-        }
+    public class LIterator implements Iterator<String> {
+        int iterIndex;
 
         @Override
         public boolean hasNext() {
-            return index < list.size();
+            return this.iterIndex < getList().size();
         }
 
         @Override
         public String next() {
-            String currentElement = list.get(index);
-            this.index++;
+            String currentElement = getList().get(this.iterIndex);
+            this.iterIndex++;
             return currentElement;
         }
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return new ListyIterator.LIterator();
     }
 }

@@ -1,40 +1,41 @@
 package T09IteratorsAndComparators.Exercise.P02Collection;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        // 1. Reading a line and until End command another commands implementation:
         Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
+        ListyIterator listIterator = null;
+        while (!line.equals("END")) {
+            String[] array = line.split(" ");
+            String command = array[0];
 
-        List<String> inputList = Arrays.stream(scanner.nextLine().split("\\s+")).skip(1).collect(Collectors.toList());
-        ListyIterator listyIterator = new ListyIterator(inputList);
+            switch (command) {
+                case "Create":
+                    String[] elements = new String[array.length - 1];
+                    for (int i = 1; i < array.length; i++) {
+                        String currentElement = array[i];
+                        elements[i - 1] = currentElement;
+                    }
 
-        String secondInput = scanner.nextLine();
-
-        while (!secondInput.equals("END")) {
-
-            switch (secondInput) {
+                    listIterator = new ListyIterator(elements);
+                    break;
                 case "Move":
-                    System.out.println(listyIterator.move());
+                    System.out.println(listIterator.move());
                     break;
-
                 case "Print":
-                    listyIterator.print();
+                    listIterator.print();
                     break;
-
                 case "HasNext":
-                    System.out.println(listyIterator.hasNext());
+                    System.out.println(listIterator.hasNext());
                     break;
-
                 case "PrintAll":
-                   listyIterator.pritAll();
+                    listIterator.printAll();
+                    break;
             }
-            secondInput = scanner.nextLine();
-
+            line = scanner.nextLine();
         }
     }
 }
